@@ -1,0 +1,74 @@
+[
+ {
+  "file": "halloKinder_v4.mp3",
+  "fig": "rotkaeppchen",
+  "text": "[cheerful] Hallo Kinder, ich bin Rotkäppchen! [happy] Ich bin so alt wie du. Ich wohne bei Mama. [curious] Wartet mal ... [excited] meine Mama ruft mich gerade!",
+  "model": "eleven_v4_turbo"
+ },
+ {
+  "file": "auJa_v4.mp3",
+  "fig": "rotkaeppchen",
+  "text": "[excited] Au ja! Dann kann ich jetzt los, Großmutter besuchen! [hesitant] Ich weiß aber gar nicht, wie der böse Wolf aussieht ... [nervous] Der Wald ist immer so gruselig.",
+  "model": "eleven_v4_turbo"
+ },
+ {
+  "file": "hierIstEsSchoen_v4.mp3",
+  "fig": "rotkaeppchen",
+  "text": "[happy] Hier ist es so schön! [relieved] Und gar nicht so gruselig, wie ich dachte.",
+  "model": "eleven_v4_turbo"
+ },
+ {
+  "file": "habeMichVerlaufen_v4.mp3",
+  "fig": "rotkaeppchen",
+  "text": "[worried] Oje, wo gehe ich denn jetzt lang? [nervous] Habe ich mich etwa verlaufen? [scared] Was soll ich jetzt nur tun?",
+  "model": "eleven_v4_turbo"
+ },
+ {
+  "file": "einFestmahl_v4.mp3",
+  "fig": "wolf",
+  "text": "[laughs evilly] Das wird ein Festmahl! [smug] Erst fresse ich die Großmutter, dann das Rotkäppchen. [whispers] Ich muss mich beeilen ... [menacing] Ich muss vor ihr am Haus sein!",
+  "model": "eleven_v4_turbo"
+ },
+ {
+  "file": "hilfsbereitesTier_v4.mp3",
+  "fig": "rotkaeppchen",
+  "text": "[cheerful] Das war aber ein hilfsbereites Tier. [thoughtful] Aber irgendwie hatte ich ein komisches Gefühl bei ihm ... [excited] Großmutter, ich komme!",
+  "model": "eleven_v4_turbo"
+ },
+ {
+  "file": "derJaeger_v4.mp3",
+  "fig": "rotkaeppchen",
+  "text": "[surprised] Ach Herrje, der Jäger!",
+  "model": "eleven_v4_turbo"
+ },
+ {
+  "file": "grossmutterGefressen_v4.mp3",
+  "fig": "rotkaeppchen",
+  "text": "[shocked] Oh je, die Großmutter wurde gefressen! [determined] Ich muss den Wolf aus dem Bett locken.",
+  "model": "eleven_v4_turbo"
+ },
+ {
+  "file": "habeDenWolf_v4.mp3",
+  "fig": "jaeger",
+  "text": "[panicked] Rotkäppchen! Ich habe doch den Wolf erschossen, nicht dich! [worried] Lebst ... lebst du noch? [gasps] Oh Gott, sie ist bewusstlos! [softly] Geht es dir gut?",
+  "model": "eleven_v4_turbo"
+ },
+ {
+  "file": "wachAuf_v4.mp3",
+  "fig": "jaeger",
+  "text": "[urgent] Wach auf! [excited] Ich habe die Großmutter aus dem Bauch des Wolfes befreit! [happy] Schau nur, sie lebt!",
+  "model": "eleven_v4_turbo"
+ },
+ {
+  "file": "grossmutterLebst_v4.mp3",
+  "fig": "rotkaeppchen",
+  "text": "[emotional] Großmutter! Aller-, allerliebste Großmutter! [happy] Du lebst! Du lebst! [excited] Juhu!",
+  "model": "eleven_v4_turbo"
+ },
+ {
+  "file": "duHastMichGerettet_v4.mp3",
+  "fig": "grossmutter",
+  "text": "[tearful] Ach, mein allerliebstes Rotkäppchen ... [warmly] du hast mich gerettet.",
+  "model": "eleven_v4_turbo"
+ }
+]

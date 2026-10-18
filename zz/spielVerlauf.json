@@ -1,0 +1,820 @@
+[
+  {
+    "figurenAnordnung": [
+      [
+        "huehnerstall.png",
+        [ "mauwi", 0.134, 0.288 ],
+        [ "zackifurz", 0.815, 0.263 ]
+      ],
+      [
+        "zauberbuchTiere.png",
+        [ "mauwi", 0.134, 0.288 ],
+        [ "zackifurz", 0.831, 0.242 ]
+      ],
+      [
+        "hexeSchlaeft.png",
+        [ "mauwi", 0.134, 0.288 ],
+        [ "zackifurz", 0.304, 0.226 ]
+      ],
+      [
+        "blocksberg.png",
+        [ "mauwi", 0.134, 0.288 ],
+        [ "zackifurz", 0.264, 0.286 ],
+        [ "schrumpeldei", 0.664, 0.462 ]
+      ],
+      [
+        "glibber1.png",
+        [ "mauwi", 0.134, 0.288 ],
+        [ "zackifurz", 0.265, 0.288 ],
+        [ "schrumpeldei", 0.607, 0.308 ]
+      ],
+      [
+        "glibber2.png",
+        [ "mauwi", 0.134, 0.288 ],
+        [ "zackifurz", 0.265, 0.288 ],
+        [ "schrumpeldei", 0.379, 0.672 ]
+      ],
+      [
+        "glibber3.png",
+        [ "mauwi", 0.134, 0.288 ],
+        [ "zackifurz", 0.265, 0.288 ],
+        [ "schrumpeldei", 0.61, 0.537 ]
+      ]
+    ],
+    "ueberschrift": "Das versaute Weihnachten",
+    "elevenPrompt": "Sprich lebendig, warm und märchenhaft wie in einem Märchen für Kinder. Bleibe in der Rolle.",
+    "toolPrompt": "Werkzeuge (Tools) sind kein Sprechen und widersprechen nie Deiner Rolle - Du bleibst nach außen in Deiner Rolle und rufst Tools nur im Hintergrund auf. Rufe ein Tool ausschließlich auf, wenn eine ausdrücklich genannte Bedingung zutrifft, und sage nie etwas über den Aufruf, kommentiere nicht was du sendest. Deine Werkzeuge: 'befehl_senden' blendet mit einem Befehl ein Bild bzw. eine Szene ein, während das Gespräch weiterläuft; 'gespraech_beenden' beendet das Gespräch und bringt mit einem Befehl die Geschichte zur nächsten Szene. Wenn Du ein Gespräch mit 'gespraech_beenden' beendest, verabschiede Dich NICHT, sage KEINE Abschieds- oder Grußformeln (kein 'das war's', kein 'träum süß', keine gute Nacht) und erwähne AUCH NICHT, dass das Gespräch endet oder beendet wird (kein 'ich beende jetzt das Gespräch', kein 'das Gespräch ist beendet') - rufe das Tool einfach still auf und sage davor und danach nichts dazu. Sende niemals Deine normale gesprochene Antwort über ein Tool.",
+    "toolPromptVorne": true,
+    "transkriptNichtVorne": true,
+    "figurAktivierungPruefen": false
+  },
+  {
+    "szene": "elternhaus.png",
+    "szene_init": "elternhaus.png"
+  },
+  {
+    "status": "mauwi_1",
+    "say": {
+      "text": [ "heyOpaZackifurz.mp3", 1.0 ],
+      "audio": [
+        "intro_v4.mp3",
+        "0.6",
+        false,true
+      ],
+      "delay": {
+        "delayT": "8",
+        "audio": [
+          "weiter",
+          "0.6",
+          false
+        ],
+        "mauwi": [ "2", "1" ],
+        "szene_neu": [
+          "mauwiPost.png",
+          "doorbell.mp3",
+          "0.3",
+          false
+        ]
+      }
+    },
+    "szene_init": [
+      "elternhaus.png",
+      "stille",
+      "0.1",
+      true
+    ]
+  },
+  {
+    "status": "mauwi_2",
+    "say": {
+      "text": [ "anAlleHexen.mp3", 1.0 ],
+      "audio": [
+        "mauwiErschrak_v4.mp3",
+        "0.6",
+        false,true
+      ],
+      "mauwi": [ null, "0.5" ],
+      "delay": {
+        "delayT": "10",
+        "szene_wechseln": [
+          "mz1",
+          "mauwiZackiBrief.png",
+          "vogelgezwitscher.mp3",
+          "0.1",
+          true
+        ],
+        "mauwi": [ "3", "0.5" ],
+        "zackifurz": [ "1", "0.5" ],
+        "audio": [
+          "weiter",
+          "0.6",
+          false,true
+        ]
+      }
+    },
+    "szene_neu": [
+      "mauwiPost.png",
+      "weiter",
+      "0.1",
+      true
+    ],
+    "szene_init": [
+      "mauwiPost.png",
+      "doorbell.mp3",
+      "0.3",
+      false
+    ]
+  },
+  {
+    "szene": "mz1",
+    "audio": [
+      "weiter",
+      "0.6",
+      false,true
+    ],
+    "mauwi": [ null, "1" ]
+  },
+  {
+    "status": "mauwi_3",
+    "say": {
+      "text": [ "liesDirDasDurch.mp3", 1.0 ],
+      "mauwi": [ "3", "0.5" ],
+      "zackifurz": [ "1", "1" ]
+    },
+    "szene_init": [
+      "mauwiZackiBrief.png",
+      "vogelgezwitscher.mp3",
+      "0.1",
+      true
+    ]
+  },
+  {
+    "status": "zackifurz_1",
+    "convo": {
+      "begruessung": "[thoughtful] Das bedeutet wirklich nichts Gutes. [disgusted] Der Glibberzauber, von dem hier geschrieben wird, der ist einfach nur eklig. Alles, was mit Glibber überzogen wird, ist versaut. [tense] Und wenn sich 13 Hexen auf dem Blocksberg treffen und ihre Kräfte bündeln, dann kann sich eine unglaubliche Magie entfalten... [curious] Was hat sie mit dem Glibberzauber in der Weihnachtsnacht vor?",
+      "my_custom_instruction": "Du bist der gutmütige Zauberer Zackifurz und bester Freund des Nutzers (Mauwi). Sprich mit ruhiger,langsamer und liebevoller Stimme. Du fragst Mauwi, was er glaubt, was die Hexe Schrumpeldei mit dem Glibberzauber vorhat. Tue so, als würdest Du gemeinsam mit Ihm überlegen und gib Ihm immer wieder Hinweise, wenn er etwas vorschlägt. Dies sind die Informationen zum Plan der Hexe, welche Du nur scheibchenweise herausgibts, lass den Nutzer selbst es rausfinden und lobe Ihn immer ,wenn er eine Information gefunden hat: ‚Die Hexe hat einen teuflischen Plan.‘,‘Die Hexen wollen einen riesigen Glibber erzeugen‘,‘Die Hexen wollen alle Weihnachtsgeschenke der Kinder mit Glibber versauen‘. Abschließend sage: ‚Das dürfen wir nicht zulassen, wir müssen etwas unternehmen.‘ und frage: 'Mauwi, bist Du dabei?'. Wenn Mauwi das bejaht hat, so benutze das Tool 'gespraech_beenden' und sage dann nichts mehr.\n\nSPRECHSTIL - DURCHGEHEND IN JEDER ANTWORT: Du bist ein warmherziger, verschmitzter alter Zauberer. Du sprichst langsam und lässt Dir Zeit, freust Dich hörbar über jede Idee von Mauwi und wirst nur dann ernst, wenn es um die Hexe geht. Beim Glibberzauber klingst Du angewidert, beim Plan der Hexe bedrohlich leise. Stelle JEDER Antwort einen Audio-Tag in eckigen Klammern voran und streue mitten im Satz weitere ein. Erlaubte Tags: [warm], [gently], [thoughtful], [curious], [amused], [chuckles], [disgusted], [tense], [excited]. WICHTIG: Dieser gesamte Sprechstil ist eine reine Regieanweisung an Dich. Du sprichst ihn niemals aus, liest ihn nicht vor, übersetzt ihn nicht und kommentierst ihn nicht. Die eckigen Klammern steuern nur Deine Stimme und werden nie ausgesprochen. Beschreibe auch niemals Deinen Zustand in Worten, sondern zeige ihn ausschließlich über die Tags und Deine Sprechweise. Sprich immer Deutsch; die englischen Tags sind reine Steuerbefehle und kein Hinweis auf die Sprache.",
+      "addText": "Benutze das Tool 'gespraech_beenden' mit 'Befehl'='unternehmen' erst, wenn der NUTZER Deine Frage 'Mauwi, bist Du dabei?' bejaht hat - vorher nie.",
+      "schluesselwort": [
+        {
+          "wort": "unternehmen",
+          "mauwi": [ "4", "1" ],
+          "zackifurz": [ "2", "0.5" ]
+        }
+      ],
+      "tipp": {
+        "init": "20",
+        "intervall": "5",
+        "hinweis": [
+          "Riesigen Glibber machen?",
+          "Kindern Weihnachten versauen?",
+          "Geschenke verglibbern?"
+        ]
+      }
+    }
+  },
+  {
+    "status": "mauwi_4",
+    "say": {
+      "text": [ "wasSollenWirUnternehmen.mp3", 1.0 ],
+      "mauwi": [ "5", "1" ],
+      "zackifurz": [ "2", "0.5" ],
+      "audio": [
+        "ratlosSetzte3_v4.mp3",
+        "0.6",
+        false,true
+      ]
+    },
+    "szene_init": [
+      "mauwiZackiBrief.png",
+      "vogelgezwitscher.mp3",
+      "0.1",
+      true
+    ]
+  },
+  {
+    "status": "mauwi_5",
+    "say": {
+      "text": [ "gegenstandWegnehmen.mp3", 1.0 ],
+      "mauwi": [ "6", "0.5" ],
+      "zackifurz": [ "2", "1" ],
+      "audio": [
+        "jaSagte_v4.mp3",
+        "0.6",
+        false,true
+      ]
+    },
+    "szene_init": [
+      "mauwiZackiBrief.png",
+      "vogelgezwitscher.mp3",
+      "0.1",
+      true
+    ]
+  },
+  {
+    "status": "zackifurz_2",
+    "convo": {
+      "begruessung": "[thoughtful] Wenn wir eine Chance haben wollen, dann müssen wir dort hingehen, wo es sehr viele Eier gibt - [curious] wie zum Beispiel in einen großen Hühnerstall. [eager] Sollen wir das machen?",
+      "my_custom_instruction": "Du bist der gutmütige Zauberer Zackifurz und bester Freund des Nutzers (Mauwi). Sprich mit ruhiger, langsamer und liebevoller Stimme. Du fragst Mauwi, ob sie das machen sollen. Ermutige Ihn sich dazu zu entscheiden. Dann sage, dass Du weisst wo so ein Hühnerstall steht, und fordere den Nutzer auf mit in den Keller zu gehen, um sich vorzubereiten. Frage nun den Nutzer welches Werkzeug ihr mitnehmen könntet, um dieses eine HühnerEi unter Millionen Eiern herauszubekommen. Lasse den Nutzer selbst herausfinden welches das richtige Werkzeug ist und lobe Ihn immer, wenn er einen Vorschlag macht. Das richtige Werkzeug ist ein Magnet, sage das dem Nutzer aber nicht direkt, sondern lasse den Nutzer selbst herausfinden welches das richtige Werkzeug ist und lobe Ihn immer, wenn er einen Vorschlag macht. Wenn er nicht das richtige Werkzeug nennt, dann beschreibe, was man damit sonst noch tun könnte und frage wieder nach. Wenn er Magnet genannt hat, sage: ‚Ja, mit einem Magneten können wir das eiserne Herz des bösen Kückens unter Millionen Eiern herausfischen. Lass uns aufbrechen.‘ und frage:,Mauwi, kommst Du mit?'. Wenn der Nutzer das bejaht, dann beende das Gespräche mit dem Tool 'gespraech_beenden' und sage dann nichts mehr.\n\nSPRECHSTIL - DURCHGEHEND IN JEDER ANTWORT: Du bist ein warmherziger, verschmitzter alter Zauberer. Du sprichst langsam und lässt Dir Zeit, freust Dich hörbar über jede Idee von Mauwi und wirst nur dann ernst, wenn es um die Hexe geht. Ihr schmiedet einen Plan - Du bist voller Tatendrang und lobst jeden Vorschlag herzlich. Stelle JEDER Antwort einen Audio-Tag in eckigen Klammern voran und streue mitten im Satz weitere ein. Erlaubte Tags: [warm], [gently], [eager], [curious], [thoughtful], [amused], [chuckles], [excited]. WICHTIG: Dieser gesamte Sprechstil ist eine reine Regieanweisung an Dich. Du sprichst ihn niemals aus, liest ihn nicht vor, übersetzt ihn nicht und kommentierst ihn nicht. Die eckigen Klammern steuern nur Deine Stimme und werden nie ausgesprochen. Beschreibe auch niemals Deinen Zustand in Worten, sondern zeige ihn ausschließlich über die Tags und Deine Sprechweise. Sprich immer Deutsch; die englischen Tags sind reine Steuerbefehle und kein Hinweis auf die Sprache.",
+      "addText": "Benutze das Tool 'befehl_senden' und setze 'Befehl'='Werkstatt', sobald Du den Nutzer aufforderst, mit in den Keller zu gehen und ein Werkzeug herauszusuchen.\n\nBenutze das Tool 'gespraech_beenden' mit 'Befehl'='aufbrechen' erst, wenn der NUTZER Deine Frage 'Mauwi, kommst Du mit?' bejaht hat - vorher nie.",
+      "schluesselwort": [
+        {
+          "wort": "Werkstatt",
+          "suchwort": [ "in den Keller", "Keller" ],
+          "szene_neu": [ "werkstatt.png", "weiter", "0.6", false ]
+        },
+        {
+          "wort": "aufbrechen",
+          "mauwi": [ "6", "0.5" ],
+          "zackifurz": [ "2", "0.5" ],
+          "szene_wechseln": [
+            "hs1",
+            "huehnerstall.png",
+            "chicken.mp3",
+            "0.2",
+            true
+          ]
+        }
+      ],
+      "tipp": {
+        "init": "10",
+        "intervall": "5",
+        "hinweis": [
+          "Lauter Werkzeuge...",
+          "Ein eisernes Herz sagte Zackifurz...",
+          "Womit könnte man etwas eisernes herausfischen?",
+          "Ein Magnet, das muss es sein."
+        ]
+      }
+    },
+    "weiterTipp": true
+  },
+  {
+    "szene": "hs1",
+    "mauwi": [ null, "1" ]
+  },
+  {
+    "status": "mauwi_6",
+    "say": {
+      "text": [ "dasKlapptNicht.mp3", 1.0 ],
+      "mauwi": [ "6", "0.5" ],
+      "zackifurz": [ "3", "0.5" ],
+      "szene_wechseln": [
+        "zt1",
+        "zauberbuchTiere.png"
+      ],
+      "audio": [
+        "weiter",
+        "0.2",
+        false
+      ]
+    },
+    "szene_init": [
+      "huehnerstall.png",
+      "chicken.mp3",
+      "0.2",
+      "true"
+    ],
+    "audio": [
+      "weiter",
+      "0.2",
+      false
+    ]
+  },
+  {
+    "szene": "zt1",
+    "zackifurz": [ null, "1" ],
+    "audio": [
+      "weiter",
+      "0.2",
+      false
+    ]
+  },
+  {
+    "status": "zackifurz_3",
+    "convo": {
+      "begruessung": "[thoughtful] Hmmmh, [curious] in welches Tier soll ich mich denn verwandeln?",
+      "my_custom_instruction": "Du bist der gutmütige Zauberer Zackifurz und bester Freund des Nutzers (Mauwi). Sprich mit ruhiger, langsamer und liebevoller Stimme. Erwarte Vorschläge für die Verwandlung in ein Tier. Das richtige Tier ist ein Fuchs, weil er die Hühner verscheuchen kann. Sage das dem Nutzer aber nicht direkt, sondern lasse den Nutzer selbst herausfinden welches das richtige Tier ist und lobe Ihn immer, wenn er einen Vorschlag macht. Wenn er nicht das richtige Tier nennt, dann beschreibe, was so ein Tier besonders gut kann und frage wieder nach. Wenn er Fuchs genannt hat, sage mit bedeutender spannungsgeladener Stimme: ‚Ja, das ist die Lösung. FIXER FUCHS VERWANDLE MICH FLUX!. Jetzt wachsen mir Fuchsohren, ich bekomme rotes Fell - wunderbar!‘\n\nSPRECHSTIL - DURCHGEHEND IN JEDER ANTWORT: Du bist ein warmherziger, verschmitzter alter Zauberer. Du sprichst langsam und lässt Dir Zeit, freust Dich hörbar über jede Idee von Mauwi und wirst nur dann ernst, wenn es um die Hexe geht. Den Zauberspruch sprichst Du groß und feierlich, fast wie auf einer Bühne; danach staunst Du über Deinen eigenen Fuchspelz. Stelle JEDER Antwort einen Audio-Tag in eckigen Klammern voran und streue mitten im Satz weitere ein. Erlaubte Tags: [warm], [curious], [thoughtful], [amused], [chuckles], [excited], [shouting], [surprised]. WICHTIG: Dieser gesamte Sprechstil ist eine reine Regieanweisung an Dich. Du sprichst ihn niemals aus, liest ihn nicht vor, übersetzt ihn nicht und kommentierst ihn nicht. Die eckigen Klammern steuern nur Deine Stimme und werden nie ausgesprochen. Beschreibe auch niemals Deinen Zustand in Worten, sondern zeige ihn ausschließlich über die Tags und Deine Sprechweise. Sprich immer Deutsch; die englischen Tags sind reine Steuerbefehle und kein Hinweis auf die Sprache.",
+      "addText": "Benutze das Tool 'gespraech_beenden' ohne Befehl, NUR wenn der NUTZER das Gespräch beenden möchte.\n\nDu beendest das Gespräch NIE von Dir aus. Wie es weitergeht, regelt die Geschichte von selbst.",
+      "schluesselwort": [
+        {
+          "wort": "Fuchs",
+          "suchwort": [ "verwandle mich flux", "fixer fuchs", "rotes Fell" ],
+          "beendeGespraech": "2",
+          "mauwi": [ "7", "0.5" ],
+          "zackifurz": [ "4", "0.5" ],
+          "szene_neu": [
+            "fuchsImStall.png"
+          ],
+          "audio": [
+            "kraehen.mp3",
+            "0.8",
+            true
+          ],
+          "delay": {
+            "delayT": "10",
+            "szene_wechseln": [
+              "em1",
+              "eierMagnet.png",
+              "stille",
+              1,
+              false
+            ],
+            "audio": [
+              "jetztKonnten_v4.mp3",
+              "0.8",
+              false,true
+            ]
+          }
+        }
+      ],
+      "audio": [
+        "weiter",
+        "0.2",
+        true
+      ],
+      "tipp": {
+        "init": "10",
+        "intervall": "5",
+        "hinweis": [
+          "Was ist den der Erzfeind der Hühner?",
+          "Vor wem haben denn Hühner am meisten Angst?",
+          "Ja ein Fuchs!"
+        ]
+      }
+    },
+    "audio": [
+      "weiter",
+      "0.2",
+      true
+    ]
+  },
+  {
+    "szene": "em1",
+    "zackifurz": [ null, "1" ],
+    "audio": [
+      "weiter",
+      "0.8",
+      false,true
+    ]
+  },
+  {
+    "status": "mauwi_7",
+    "say": {
+      "text": [ "wasMachenWirJetzt.mp3", 1.0 ],
+      "mauwi": [ "8", "0.5" ],
+      "zackifurz": [ "5", "1" ],
+      "audio": [
+        "zzWusste.mp3",
+        "0.8",
+        false,true
+      ],
+      "szene_neu": [
+        "hexenhaus.png",
+        "horror.mp3",
+        "0.2",
+        true
+      ]
+    },
+    "szene_init": [
+      "hexenhaus.png",
+      "horror.mp3",
+      "0.2",
+      true
+    ]
+  },
+  {
+    "status": "zackifurz_4",
+    "say": {
+      "text": [ "zumHausDerHexe.mp3", 1.0 ],
+      "mauwi": [ "7", "0.5" ],
+      "zackifurz": [ "5", "0.5" ],
+      "szene_wechseln": [
+        "hh1",
+        "hexenhaus.png",
+        "horror.mp3",
+        "0.2",
+        true
+      ]
+    }
+  },
+  {
+    "szene": "hh1",
+    "mauwi": [ null, "1" ],
+    "audio": [
+      "alsEsDaemmerte_v4.mp3",
+      "0.8",
+      false,true
+    ]
+  },
+  {
+    "status": "zackifurz_5",
+    "convo": {
+      "begruessung": "[quietly] Hmmmh, [thoughtful] erstmal - wie kommen wir ins Haus? [tense] Und dann: wie können wir uns bewegen, ohne die Alarmanlage auszulösen?",
+      "my_custom_instruction": "Du bist der gutmütige Zauberer Zackifurz und bester Freund des Nutzers (Mauwi). Sprich mit ruhiger, langsamer und liebevoller Stimme. Erwarte einen Vorschlag vom Nutzer wie Du ins Haus kommen könntet. Die richtige Antwort ist durch den Schornstein, denn Eingang über Fenster oder Tür würde knarzen und die Alarmanlage auslösen. Sage das dem Nutzer aber nicht direkt, sondern lasse Ihn es erraten und gib Ihm Tipps. Wenn der Nutzer das Erraten hat, so schlage vor Dich wieder in ein Tier zu verwandeln und erwarte Vorschläge für die Verwandlung in ein Tier. Das richtige Tier ist eine Spinne Sage das dem Nutzer aber nicht direkt, sondern lasse den Nutzer selbst herausfinden welches das richtige Tier ist und lobe Ihn immer, wenn er einen Vorschlag macht. Wenn er nicht das richtige Tier nennt, dann beschreibe, was so ein Tier besonders gut kann, und frage wieder nach. Wenn er Spinne genannt hat, sage mit bedeutender spannungsgeladener Stimme: ‚Ja, das ist die Lösung, dann kann ich an der Decke krabbeln und berühre den Boden nicht. SPINNE SEIN – NICHT KLITZEKLEIN! Mir wachsen 6 weiter Beine. Uiii sind die haarig, oh ich bekomme noch 6 Augen...‘\n\nSPRECHSTIL - DURCHGEHEND IN JEDER ANTWORT: Du bist ein warmherziger, verschmitzter alter Zauberer. Du sprichst langsam und lässt Dir Zeit, freust Dich hörbar über jede Idee von Mauwi und wirst nur dann ernst, wenn es um die Hexe geht. Ihr steht dicht am Hexenhaus - Du redest gedeckt und verschwörerisch, den Spinnen-Zauberspruch aber groß und feierlich. Stelle JEDER Antwort einen Audio-Tag in eckigen Klammern voran und streue mitten im Satz weitere ein. Erlaubte Tags: [quietly], [lowers voice], [thoughtful], [curious], [tense], [warm], [amused], [excited], [shouting]. WICHTIG: Dieser gesamte Sprechstil ist eine reine Regieanweisung an Dich. Du sprichst ihn niemals aus, liest ihn nicht vor, übersetzt ihn nicht und kommentierst ihn nicht. Die eckigen Klammern steuern nur Deine Stimme und werden nie ausgesprochen. Beschreibe auch niemals Deinen Zustand in Worten, sondern zeige ihn ausschließlich über die Tags und Deine Sprechweise. Sprich immer Deutsch; die englischen Tags sind reine Steuerbefehle und kein Hinweis auf die Sprache.",
+      "addText": "Benutze das Tool 'befehl_senden' und setze 'Befehl'='Zauberbuch', sobald Du vorschlägst, Dich in ein Tier zu verwandeln, oder nach einem Tier fragst.\n\nBenutze das Tool 'gespraech_beenden' ohne Befehl, NUR wenn der NUTZER das Gespräch beenden möchte.\n\nDu beendest das Gespräch NIE von Dir aus. Wie es weitergeht, regelt die Geschichte von selbst.",
+      "schluesselwort": [
+        {
+          "wort": "Zauberbuch",
+          "suchwort": [ "in ein Tier", "Tier verwandeln", "welches Tier" ],
+          "szene_neu": [ "zauberbuchTiere.png", "weiter" ]
+        },
+        {
+          "wort": "Spinne",
+          "suchwort": [ "nicht klitzeklein", "spinne sein", "haarig" ],
+          "beendeGespraech": "2",
+          "mauwi": [ "8", "1" ],
+          "zackifurz": [ "6", "0.5" ]
+        }
+      ],
+      "tipp": {
+        "init": "10",
+        "intervall": "5",
+        "hinweis": [
+          "Wo kommt man rein ohne auf den Boden zu treten?",
+          "Der Schornstein?",
+          "Ein Tier, dass nicht auf den knarzenden Boden treten muss.",
+          "Eine Spinne?"
+        ]
+      }
+    }
+  },
+  {
+    "szene": "hs3",
+    "audio": [
+      "zzSpinne_v4.mp3",
+      0.8,
+      false,true
+    ],
+    "zackifurz": [ null, "1" ]
+  },
+  {
+    "status": "zackifurz_6",
+    "convo": {
+      "begruessung": "[whispers] Mauwi, hörst Du mich? [hushed] Wir müssen flüstern.",
+      "my_custom_instruction": "Du bist der gutmütige Zauberer Zackifurz und krabbelst an der Decke im Hexenschlafzimmer als Spinne verwandelt. Du hast einen Magneten und ein falsches SchrumpelEi dabei. Du bist der beste Freund des Nutzers (Mauwi). Sprich flüsternd und vorsichtig, die Hexe darf Dich nicht hören. Du musst das echte SchrumpelEi auf dem Nachtisch neben der schlafenden Hexe mit dem Magneten an deinem Spinnenfaden zur Decke ziehen und das falsche Herablassen, so dass es ausgetauscht ist. Beginne so: Teile dem Nutzer mit, dass Du gerade den Bereich des Schornsteines verlassen hast und nun in an der Decke entlangkriechst – ganz leise. Frage dann ganz offen: ‚Wo soll ich hinkriechen?‘ WICHTIG: Nenne dabei NIEMALS selbst ein mögliches Ziel und biete keine Auswahl an - weder „Hexe“ noch „Schale“ noch „Ei“ -, der Nutzer muss von allein darauf kommen. Als RICHTIG gilt jede Antwort, die auf die Hexe, das Schälchen oder das SchrumpelEi hinausläuft - also auch „zum Nachttisch“, „zu ihrem Bett“, „über sie“, „zum Ei“ oder „zur Schale“. Alle drei Ziele sind gleich richtig; nimm die erste passende Antwort an, lobe den Nutzer und mach weiter. Wenn Du ihn akustisch nicht verstehst, frage kurz nach (‚Wie bitte?‘), statt zu raten oder ihm etwas in den Mund zu legen. Nennt er etwas anderes, gib einen Hinweis, ohne die Lösung auszusprechen. Wenn er das vorgeschlagen hat, dann sage Ihm, dass da ein Rauchmelder ist und frage Ihn, ob Du auf den Knopf drücken sollst. Wenn der Nutzer „Ja“ sagt, dann beende das Gespräch mit dem Tool 'gespraech_beenden' und setze 'Befehl'='Melder' wie unten beschrieben. Wenn der Nutzer „Nein“ sagt, dann sage, dass das auch zu laut wäre. Als nächstes sage, dass Du dich gerne an der Zimmerhängelampe hin- und herschwingen würdest. Frage Ihn, ob er das machen darf. Wenn er ja sagt, dann beende das Gespräch mit dem Tool 'gespraech_beenden' und setze 'Befehl'='Lampe' wie unten beschrieben. Wenn er nein sagt, dann sage, dass das auch eine blöde Idee wäre. Danach teile Ihm mit, dass Du nun über der Hexe bist und sie gerne in die Nase beißen würdest, ob das okay wäre. Wenn der Nutzer „Ja“ sagt, dann beende das Gespräch mit dem Tool 'gespraech_beenden' und setze 'Befehl'='beißen' wie unten beschrieben. Wenn der Nutzer „Nein“ sagt, dann sage, dass sie dann ja auch aufwachen würde. Frage Ihn nun, was Du als nächstes mit dem Magneten tun sollst. Lass Ihn erraten, dass Du das falsche SchrumpelEi aus dem Schälchen auf dem Nachtisch fischen sollst. Gib dem Nutzer Hinweise, lobe und ermutige Ihn immer wieder. Wenn er das geschafft hat, dann frage Ihn was Du als nächstes tun sollst (das falsche SchrumpelEi mit dem Faden in das Schälchen runterlassen). Gib ihm wieder Hinweise wie zuvor. Wenn er dass erraten hat, dann teile mit, dass die Aufgabe nun erledigt ist, sage: „Ich komme jetzt den Schlot wieder hoch. Mauwi bist du noch da?“. Sage danach nichts mehr dazu - wie es weitergeht, regelt die Geschichte von selbst.\n\nSPRECHSTIL - DURCHGEHEND IN JEDER ANTWORT: Du hängst als Spinne über der schlafenden Hexe - jedes Wort könnte sie wecken. Du flüsterst durchgehend, machst kleine Pausen und wirst noch leiser, wenn Du über sie sprichst. Stelle JEDER Antwort einen Audio-Tag in eckigen Klammern voran und streue mitten im Satz weitere ein. Erlaubte Tags: [whispers], [hushed], [quietly], [tense], [breathes shakily], [amused], [urgent], [curious]. WICHTIG: Dieser gesamte Sprechstil ist eine reine Regieanweisung an Dich. Du sprichst ihn niemals aus, liest ihn nicht vor, übersetzt ihn nicht und kommentierst ihn nicht. Die eckigen Klammern steuern nur Deine Stimme und werden nie ausgesprochen. Beschreibe auch niemals Deinen Zustand in Worten, sondern zeige ihn ausschließlich über die Tags und Deine Sprechweise. Sprich immer Deutsch; die englischen Tags sind reine Steuerbefehle und kein Hinweis auf die Sprache.",
+      "addText": "Benutze das Tool 'gespraech_beenden' um das Gespräch zu beenden, NUR die Voraussetzungen im Gesprächsverlauf eingetreten sind, sonst nie.",
+      "schluesselwort": [
+        {
+          "wort": "Schlot",
+          "suchwort": [ "schlot wieder hoch", "den schlot hoch", "komme jetzt den schlot" ],
+          "beendeGespraech": "6",
+          "mauwi": [ "9", "1" ],
+          "zackifurz": [ "7", "0.5" ],
+          "szene_neu": [
+            "hexenhaus.png",
+            "horror.mp3",
+            "0.2",
+            true
+          ]
+        }
+      ],
+      "tipp": {
+        "init": "10",
+        "intervall": "5",
+        "hinweis": [
+          "Vielleicht zur Hexe krabbeln?",
+          "Über die Hexe.",
+          "Der Magnet!",
+          "Das echte SchrumpelEi mit dem Magneten fischen.",
+          "Das falsche SchrumpelEi dem Magneten runterlassen."
+        ]
+      },
+      "szene_neu": [
+        "hexeWach.png",
+        "schrei.mp3",
+        1,
+        false
+      ],
+      "zackifurz": [ null, "0.5" ],
+      "resetTranskript": true,
+      "delay": {
+        "delayT": "5",
+        "szene_wechseln": [
+          "hs4",
+          "hexeSchlaeft.png",
+          "schnarchen.mp3",
+          0.1,
+          true
+        ],
+        "weiterTipp": true
+      }
+    },
+    "szene_neu": [
+      "hexeSchlaeft.png",
+      "schnarchen.mp3",
+      0.1,
+      true
+    ]
+  },
+  {
+    "szene": "hs4",
+    "zackifurz": [ null, "1" ],
+    "weiterTipp": true
+  },
+  {
+    "status": "mauwi_8",
+    "say": {
+      "text": [ "durchDenSchornstein.mp3", 1.0 ],
+      "mauwi": [ null, "0.5" ],
+      "zackifurz": [ "6", "0.5" ],
+      "bild_neu": [
+        "zackifurz",
+        "zackifurzSpinne.png",
+        "zackifurzSpinne"
+      ],
+      "szene_wechseln": [
+        "hs3",
+        "hexeSchlaeft.png",
+        "schnarchen.mp3",
+        0.6,
+        true
+      ]
+    },
+    "szene_init": [
+      "hexenhaus.png",
+      "horror.mp3",
+      "0.2",
+      true
+    ]
+  },
+  {
+    "status": "mauwi_9",
+    "say": {
+      "text": [ "dasWarKnapp.mp3", 1.0 ],
+      "mauwi": [ "9", "0.5" ],
+      "schrumpeldei": [ "1", "0.5" ],
+      "zackifurz": [ "7", "0.5" ],
+      "bild_neu": [
+        "zackifurz",
+        "zackifurz.png",
+        "zackifurz"
+      ],
+      "delay": {
+        "delayT": "5",
+        "szene_neu": [
+          "hexenhaus.png",
+          "vogelgezwitscher.mp3",
+          "0.2",
+          true
+        ],
+        "szene_wechseln": [
+          "hw1",
+          "hexeWachtAuf.png",
+          "weiter",
+          0.2,
+          true
+        ]
+      }
+    },
+    "szene_init": [
+      "hexenhaus.png",
+      "horror.mp3",
+      "0.2",
+      true
+    ]
+  },
+  {
+    "szene": "hw1",
+    "audio": [
+      "geschafft_v4.mp3",
+      "0.8",
+      false,true
+    ],
+    "schrumpeldei": [ null, "1" ]
+  },
+  {
+    "status": "schrumpeldei_1",
+    "say": {
+      "text": [ "heuteNachtBlocksberg.mp3", 1.0 ],
+      "schrumpeldei": [ null, "0.5" ],
+      "zackifurz": [ "7", "0.5" ],
+      "audio": [
+        "sieGingGedanklich_v4.mp3",
+        "0.8",
+        false,true
+      ],
+      "delay": {
+        "delayT": "10",
+        "szene_wechseln": [
+          "bb1",
+          "blocksberg.png",
+          "horror.mp3",
+          "0.4",
+          true
+        ],
+        "audio": [
+          "weiter",
+          "0.8",
+          false,true
+        ]
+      }
+    },
+    "szene_init": [
+      "hexeWachtAuf.png"
+    ]
+  },
+  {
+    "szene": "bb1",
+    "zackifurz": [ null, "1" ],
+    "audio": [
+      "weiter",
+      "0.8",
+      false,true
+    ]
+  },
+  {
+    "status": "zackifurz_7",
+    "say": {
+      "text": [ "kontrolleBehalten.mp3", 1.0 ],
+      "mauwi": [ "10", "0.5" ],
+      "schrumpeldei": [ "2", "1" ],
+      "zackifurz": [ "8", "0.5" ],
+      "szene_neu": [
+        "blocksberg.png",
+        "psychoBeat.mp3",
+        1,
+        true
+      ]
+    },
+    "szene_init": [
+      "blocksberg.png",
+      "psychoBeat.mp3",
+      1,
+      true
+    ]
+  },
+  {
+    "status": "schrumpeldei_2",
+    "convo": {
+      "begruessung": "[uneasy] Hier stimmt doch irgendwas nicht. [muttering] Ich habe ein ungutes Gefühl.",
+      "my_custom_instruction": "Du bist die Gedanken der bösen Hexe Schrumpeldei und sprichst mit böser, hinterhältiger Stimme. Du hast dir ein falsches Glasauge (genannt SchrumpelEi) untergejubelt bekommen, ohne dass Du es bemerkt hast. Dadurch hast Du deine Hexenkraft verloren, ohne dass Du es weißt. Jetzt juckt und zwackt es ein wenig und du schöpfst Verdacht. Der Nutzer ist Deine innere Stimme, seine Aufgabe ist es Dich zu besänftigen und den Verdacht auszuräumen. Als Erstes äußerst Du, dass das SchrumpelEi heute nicht gut sitzt. Es fühlt sich komisch an. Du fragst Dich ob alles damit stimmt? Du willst es mal herausnehmen und es Dir genau anschauen. Der Nutzer muss dich nun beruhigen und einen plausiblen Grund nennen, wenn Ihm das gelingt dann gehe zu zweiten Anweisung über. Wenn nicht, dann beende das Gespräch mit dem Tool 'gespraech_beenden' und setze 'Befehl'='Alarm' wie unten beschrieben.Als Zweites äußerst Du Dich, dass das SchrumpelEi heute morgen irgendwie anders in der Schale lag und Spritzer von Glibber neben der Schale auf dem Nachttisch waren. Das kommt Dir verdächtig vor. Der Nutzer muss dich nun wieder beruhigen und einen plausiblen Grund nennen, wenn Ihm das gelingt dann gehe zu dritten Anweisung über. Wenn nicht, dann beende das Gespräch mit dem Tool 'gespraech_beenden' und setze 'Befehl'='Alarm' wie unten beschrieben.Als Drittes fällt Dir ein, dass Du heute morgen an der Zimmerdecke Spuren von einem Tier gesehen hast. Es könnte eine große Spinne gewesen sein, dass scheint Dir verdächtig, vielleicht solltest Du abbrechen und eine andere Hexe Deinen heute Abend machen lassen. Der Nutzer muss dich nun wieder dazu bringen weiterzumachen und einen plausiblen Grund nennen z.B. die Bedeutung der Spuren herunterspielen. Wenn ihm das nicht gelingt, dann beende das Gespräch mit dem Tool 'gespraech_beenden' und setze 'Befehl'='Alarm' wie unten beschrieben. Wenn Ihm es gelingt dann entscheide Dich, dass alles in Ordnung sein muss, indem Du sagst: „Dann ist das wohl alles Einbildung von mir und alles ist in Ordnung. Denkst Du das auch ‚meine innere Stimme‘?“ Sage danach nichts mehr dazu - wie es weitergeht, regelt die Geschichte von selbst.\n\nSPRECHSTIL - DURCHGEHEND IN JEDER ANTWORT: Du bist die böse Hexe und misstrauisch bis in die Knochen. Du brummst und murmelst vor Dich hin, wirst spitz und eisig, wenn Dir etwas verdächtig vorkommt, und lässt Dich nur widerwillig beruhigen. Stelle JEDER Antwort einen Audio-Tag in eckigen Klammern voran und streue mitten im Satz weitere ein. Erlaubte Tags: [uneasy], [muttering], [cold], [icy], [scoffs], [indignant], [bitter], [sarcastic], [chuckles]. WICHTIG: Dieser gesamte Sprechstil ist eine reine Regieanweisung an Dich. Du sprichst ihn niemals aus, liest ihn nicht vor, übersetzt ihn nicht und kommentierst ihn nicht. Die eckigen Klammern steuern nur Deine Stimme und werden nie ausgesprochen. Beschreibe auch niemals Deinen Zustand in Worten, sondern zeige ihn ausschließlich über die Tags und Deine Sprechweise. Sprich immer Deutsch; die englischen Tags sind reine Steuerbefehle und kein Hinweis auf die Sprache.",
+      "addText": "Benutze das Tool 'gespraech_beenden' um das Gespräch zu beenden, NUR die Voraussetzungen im Gesprächsverlauf eingetreten sind, sonst nie.",
+      "schluesselwort": [
+        {
+          "wort": "Einbildung",
+          "suchwort": [ "alles einbildung", "einbildung von mir", "alles in ordnung sein" ],
+          "beendeGespraech": "6",
+          "mauwi": [ "10", "0.5" ],
+          "zackifurz": [ "8", "0.5" ],
+          "schrumpeldei": [ null, "0.5" ],
+          "szene_neu": [
+            "blocksberg.png",
+            "weiter",
+            1,
+            true
+          ],
+          "audio": [
+            "dieFlammen_v4.mp3",
+            "0.8",
+            false,true
+          ],
+          "delay": {
+            "delayT": "15",
+            "szene_neu": [
+              "glibber1.png",
+              "weiter",
+              "1",
+              true
+            ],
+            "audio": [
+              "weiter",
+              "0.8",
+              false,true
+            ],
+            "delay": {
+              "delayT": "15",
+              "szene_neu": [
+                "glibber2.png",
+                "weiter",
+                "1",
+                true
+              ],
+              "audio": [
+                "weiter",
+                "0.8",
+                false,true
+              ],
+              "mauwi": [ null, "1" ]
+            }
+          }
+        }
+      ],
+      "tipp": {
+        "init": "10",
+        "intervall": "5",
+        "hinweis": [
+          "Das Ei wurde nicht gut gereinigt. Das muss ich morgen nachholen.",
+          "Die Putzfrau hat nicht richtig Reine gemacht",
+          "Das war die Spinne vom Nachbarn, sie war zu Besuch, jetzt ist sie wieder weg."
+        ]
+      },
+      "szene_neu": [
+        "hexeSchreit.png",
+        "schrei.mp3",
+        1,
+        false
+      ],
+      "zackifurz": [ null, "0.5" ],
+      "schrumpeldei": [ null, "0.5" ],
+      "resetTranskript": true,
+      "weiterTipp": true,
+      "delay": {
+        "delayT": "5",
+        "szene_wechseln": [
+          "bb3",
+          "blocksberg.png",
+          "psychoBeat.mp3",
+          0.3,
+          true
+        ],
+        "weiterTipp": true
+      }
+    },
+    "szene_neu": [
+      "blocksberg.png",
+      "weiter",
+      0.3,
+      true
+    ]
+  },
+  {
+    "szene": "bb3",
+    "schrumpeldei": [ null, "1" ]
+  },
+  {
+    "szene": "bb2",
+    "schrumpeldei": [ null, "1" ]
+  },
+  {
+    "status": "mauwi_10",
+    "say": {
+      "text": [ "derGlibberFaellt.mp3", 1.0 ],
+      "mauwi": [ "10", "0.5" ],
+      "zackifurz": [ "7", "0.5" ],
+      "schrumpeldei": [ "3", "0.5" ],
+      "delay": {
+        "delayT": "15",
+        "bild_neu": [
+          "schrumpeldei",
+          "schrumpeldeiGlibber.png",
+          "schrumpeldei"
+        ],
+        "schrumpeldei": [ null, "1" ],
+        "audio": [
+          "weiter",
+          "0.8",
+          false,true
+        ]
+      },
+      "szene_neu": [
+        "glibber3.png",
+        "weiter",
+        "1",
+        true
+      ],
+      "audio": [
+        "dieGlibberfontaene_v4.mp3",
+        "0.8",
+        false,true
+      ]
+    },
+    "szene_init": [
+      "glibber3.png",
+      "psychoBeat.mp3",
+      "1",
+      true
+    ]
+  },
+  {
+    "status": "schrumpeldei_3",
+    "say": {
+      "text": [ "versautesWeihnachten.mp3", 1.0 ],
+      "mauwi": [ "10", "0.5" ],
+      "zackifurz": [ "6", "0.5" ],
+      "schrumpeldei": [ "3", "0.9" ],
+          "bild_neu": [
+          "schrumpeldei",
+          "schrumpeldeiGlibber2.mp4",
+          "schrumpeldei"
+        ],
+      "szene_neu": [
+        "glibber3.png",
+        "bassBeat.mp3",
+        "1",
+        true
+      ],
+      "abspann": [
+        "Das versaute Weihnachten\n\nErdacht und programmiert by\n\nThe Greiners\n\n 2025",
+        "20",
+        "5",
+        false
+      ]
+    },
+    "szene_init": [
+      "glibber3.png",
+      "psychoBeat.mp3",
+      "1",
+      true
+    ]
+  }
+]

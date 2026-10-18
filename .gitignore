@@ -1,0 +1,5 @@
+# Lokale Spuren
+Thumbs.db
+.DS_Store
+*.bak*
+user.json

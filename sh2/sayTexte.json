@@ -1,0 +1,146 @@
+[
+ {
+  "file": "mordImNachtzug_v4.mp3",
+  "status": null,
+  "teile": [
+   {
+    "fig": "drwatson",
+    "voice": "8TMmdpPgqHKvDOGYP2lN",
+    "text": "[dramatic] Mord im Nachtzug!"
+   }
+  ],
+  "model": "eleven_v4_turbo"
+ },
+ {
+  "file": "wirSolltenUnsDasOpfer_v4.mp3",
+  "status": null,
+  "teile": [
+   {
+    "fig": "sherlock",
+    "voice": "JH302OKVzGGJc47f08ex",
+    "text": "[thoughtful] Watson, wir sollten uns mal das Opfer in Abteil vier anschauen."
+   }
+  ],
+  "model": "eleven_v4_turbo"
+ },
+ {
+  "file": "fragenWirDenSchaffner_v4.mp3",
+  "status": null,
+  "teile": [
+   {
+    "fig": "drwatson",
+    "voice": "8TMmdpPgqHKvDOGYP2lN",
+    "text": "[eager] Sherlock, fragen wir doch mal den Schaffner, ob er einen Grundrissplan von diesem Waggon und einen Belegungsplan hat."
+   }
+  ],
+  "model": "eleven_v4_turbo"
+ },
+ {
+  "file": "watsonEsWurdeEinMord_v4.mp3",
+  "status": null,
+  "teile": [
+   {
+    "fig": "sherlock",
+    "voice": "JH302OKVzGGJc47f08ex",
+    "text": "[urgent] Watson, es wurde ein Mord begangen! [puzzled] Wieso steht der Zug auf freier Strecke? Wir sind noch gar nicht am Ziel. [determined] Kommen Sie schnell, wir fragen den Schaffner."
+   }
+  ],
+  "model": "eleven_v4_turbo"
+ },
+ {
+  "file": "istWildermuthGreifbar_v4.mp3",
+  "status": null,
+  "teile": [
+   {
+    "fig": "drwatson",
+    "voice": "8TMmdpPgqHKvDOGYP2lN",
+    "text": "[hopeful] Sherlock, vielleicht ist nun Herr Wildermuth greifbar?"
+   }
+  ],
+  "model": "eleven_v4_turbo"
+ },
+ {
+  "file": "ichBinAufDemKlo_v4.mp3",
+  "status": null,
+  "teile": [
+   {
+    "fig": "wildermuth",
+    "voice": "Ay1WwRHxUsu3hEeAp8JZ",
+    "text": "[annoyed] Ich bin auf dem Kloooo! [shouting] Kommen Sie später wieder!"
+   }
+  ],
+  "model": "eleven_v4_turbo"
+ },
+ {
+  "file": "abteil8NichtBelegt_v4.mp3",
+  "status": null,
+  "teile": [
+   {
+    "fig": "drwatson",
+    "voice": "8TMmdpPgqHKvDOGYP2lN",
+    "text": "[puzzled] Sherlock, Abteil acht ist doch gar nicht belegt?"
+   }
+  ],
+  "model": "eleven_v4_turbo"
+ },
+ {
+  "file": "daLiegtDochEiner_v4.mp3",
+  "status": null,
+  "teile": [
+   {
+    "fig": "drwatson",
+    "voice": "8TMmdpPgqHKvDOGYP2lN",
+    "text": "[surprised] Sherlock, da liegt doch einer?! [urgent] Herr Schaffner, zerren Sie den mal hervor!"
+   }
+  ],
+  "model": "eleven_v4_turbo"
+ },
+ {
+  "file": "einBlinderPassagier_v4.mp3",
+  "status": null,
+  "teile": [
+   {
+    "fig": "sherlock",
+    "voice": "JH302OKVzGGJc47f08ex",
+    "text": "[amused] Ein blinder Passagier, hört, hört! [curious] Was hat er zu dieser Misere zu sagen?"
+   }
+  ],
+  "model": "eleven_v4_turbo"
+ },
+ {
+  "file": "abteil9Wildermuth_v4.mp3",
+  "status": null,
+  "teile": [
+   {
+    "fig": "sherlock",
+    "voice": "JH302OKVzGGJc47f08ex",
+    "text": "[surprised] Abteil neun? [thoughtful] Das ist doch Herr Wildermuth."
+   }
+  ],
+  "model": "eleven_v4_turbo"
+ },
+ {
+  "file": "wurzKnopfSchmeicheln_v4.mp3",
+  "status": null,
+  "teile": [
+   {
+    "fig": "sherlock",
+    "voice": "JH302OKVzGGJc47f08ex",
+    "text": "[thoughtful] Ich glaube, wir müssen Frau Wurz-Knopf schmeicheln. [amused] Ich glaube, Sie, Herr Watson, könnten ihr gefallen. [teasing] Spielen Sie etwas vor. Dann wird sie redseliger."
+   }
+  ],
+  "model": "eleven_v4_turbo"
+ },
+ {
+  "file": "sherlockBierkruege_v4.mp3",
+  "status": null,
+  "teile": [
+   {
+    "fig": "drwatson",
+    "voice": "8TMmdpPgqHKvDOGYP2lN",
+    "text": "[puzzled] Sherlock, Bierkrüge? ... [excited] Da klingelt was bei mir!"
+   }
+  ],
+  "model": "eleven_v4_turbo"
+ }
+]

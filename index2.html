@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="imgEleven/KrimiZeit.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
+
+    <title>KrimiZeit</title>
+    <style>
+        /* Beim Ziehen einer Figur (und bei jedem Doppelklick) markierte der Browser sonst
+           Bilder und Text blau. Eingabefelder und das Notizbuch bleiben markierbar. */
+        body {
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        input, textarea, [contenteditable="true"], .notizbuch, #notizbuch {
+            user-select: text;
+            -webkit-user-select: text;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 2em;
+            margin: 0;
+            display: grid;
+            grid-template-rows: auto auto auto 1fr;
+            height: 100vh;
+            gap: 1em;
+            background-color: #888; /* mittleres Grau */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .personen {
+            top: 18vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 4vw;
+            z-index: 2;
+            position: absolute;
+            margin-left: 8vw;
+            margin-right: 8vw;
+            transition: all 1s ease; /* sorgt für weiches Wachsen */
+            flex-wrap: wrap; /* <-- NEU für kleine Screens */
+        }
+
+            /* video: per bild_neu getauschte Figuren (z. B. koehlerAengstlich.mp4)
+               sollen dieselbe weiche opacity-Transition (2s) wie die PNG-Figuren
+               haben - sonst blenden sie ruckartig ab. Der weiche Verlauf muss aus
+               dem CSS kommen, weil borderWeg() die Inline-Transition wieder leert. */
+            .personen img,
+            .personen video {
+                opacity: 0;
+                max-height: min(21vh,21vw);
+                object-fit: contain;
+                border-radius: 10px;
+                background: transparent;
+                transform: scale(1); /* Start klein */
+                transition: transform 0.5s ease, opacity 2s ease;
+                cursor: default;
+                touch-action: none; /* Ziehen per Finger, ohne dass die Seite scrollt/zoomt */
+            }
+
+        .szene {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+            .szene img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            /* Das Hintergrundbild/-video in .szene soll z-index bekommen können */
+            .szene .background {
+                position: absolute; /* wichtig für z-index */
+                inset: 0; /* füllt die ganze Szene */
+                z-index: 0; /* Standard: hinten */
+                object-fit: cover; /* wie bisher */
+                object-position: center;
+                pointer-events: none;
+            }
+
+                .szene .background.fg {
+                    z-index: 10000; /* vor #textzeile (z-index: 999), .denk-overlay (10), .personen (2), h1 (2) */
+                    pointer-events: none;
+                }
+
+        h1 {
+            text-align: center;
+            z-index: 2;
+            font-size: 1.6em;
+            margin-top: 1vh;
+            position: relative;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .bild-mit-overlay {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Der Personen-Bereich liegt (z-index 2) ueber der Szene und spannt eine
+           grosse Flaeche auf - inklusive der Figuren, die gerade unsichtbar sind
+           (opacity: 0 schluckt Klicks trotzdem). Sonst blockiert er Klicks auf die
+           Szene darunter, z. B. auf die Vorschau beim Szenenwechsel. Klickbar ist
+           nur, was das Skript per cursor: pointer aktiv geschaltet hat. */
+        .personen,
+        .bild-mit-overlay,
+        .person-wrap {
+            pointer-events: none;
+        }
+
+        .personen img,
+        .personen video {
+            pointer-events: none;
+        }
+
+            /* Klickbar bleibt nur, was das Skript per cursor: pointer aktiv
+               geschaltet hat, sowie die immer erreichbaren UI-Elemente
+               (Denkblase, Notizbuch-Icon). Auch Figuren, die per bild_neu auf
+               ein <video> (z. B. koehlerAengstlich.mp4) getauscht wurden -
+               sonst erben sie das pointer-events: none des .bild-mit-overlay
+               und waeren nicht anklickbar. */
+            .personen img[style*="cursor: pointer"],
+            .personen video[style*="cursor: pointer"],
+            .personen img.denk-overlay,
+            .personen img.nb-badge {
+                pointer-events: auto;
+            }
+
+        /* Denkblase als 3-teiliges Composite: linker Teil | dehnbares Mittelstueck (Text)
+           | rechter Teil. Geschlossen (Mitte width:0) sehen die beiden Haelften wie die
+           urspruengliche Blase aus; beim Klick faehrt die Mitte auf und zeigt den Text. */
+        .denk-overlay {
+            all: unset;
+            position: absolute;
+            top: -10px;
+            right: 0;
+            opacity: 0; /* Versteck-Default (0 beibehalten); sichtbar wird sie per JS mit 0.5 */
+            z-index: 30; /* über vergrößerten Figuren (Container z-index 10), wie das Notizbuch-Icon */
+            height: 41px; /* denk.png 835x679, auf 50px Breite skaliert -> ~41px hoch */
+            /* Im Ruhezustand ist die Blase unsichtbar und darf dann WEDER die Hand zeigen
+               NOCH Klicks abfangen - sonst liegt im oberen Bilddrittel ein unsichtbarer
+               Klickfänger über der Szene, und POI-Tooltips darunter lassen sich nicht mehr
+               anklicken. Sichtbar geschaltet wird sie per JS (denkblaseKlickbar). */
+            pointer-events: none;
+            cursor: default;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            background: transparent;
+            display: flex;
+            align-items: stretch;
+            box-sizing: content-box;
+        }
+
+        .denk-teil {
+            height: 100%;
+            flex: 0 0 auto;
+            background-repeat: no-repeat;
+            background-size: 100% 100%; /* Haelfte fuellt ihre Box (Bild per JS gesetzt) */
+        }
+
+        .denk-mitte {
+            height: 100%;
+            width: 0; /* geschlossen */
+            flex: 0 0 auto;
+            overflow: hidden;
+            background-repeat: no-repeat;
+            background-size: 100% 100%; /* dehnt die schmale Mittel-Saeule auf jede Breite */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: width 0.35s ease;
+            /* Je 1px unter die Nachbar-Teile ziehen: verdeckt die Subpixel-Nahtlinien an den
+               Uebergaengen (geschlossen ueberlappen so links/rechts, offen jede der 2 Naehte). */
+            margin-left: -1px;
+            margin-right: -1px;
+        }
+
+        .denk-text {
+            display: inline-block;
+            white-space: nowrap;
+            color: #333; /* dunkelgrau */
+            font-size: 11px;
+            line-height: 1;
+            padding: 0 3px;
+            opacity: 0;
+            transition: opacity 0.2s ease 0.1s;
+            pointer-events: none;
+        }
+
+            .denk-overlay.offen .denk-text {
+                opacity: 1;
+            }
+
+        #textzeile {
+            position: fixed; /* Bleibt am Viewport unten kleben */
+            bottom: 5vh;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 1.4em; /* leicht reduziert */
+            max-width: 90vw; /* sorgt dafür, dass der Text nicht rausläuft */
+            visibility: visible; /* falls JS nicht gesetzt ist */
+            z-index: 999;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        img {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+            img.fade-in {
+                opacity: 1;
+            }
+
+            img.fade-out {
+                opacity: 0;
+            }
+
+            img.visible {
+                opacity: 1;
+            }
+        /* Während der Vordergrund-Haltung alle UI-Overlays für Pointer sperren */
+        .body--bgHold #textzeile,
+        .body--bgHold .personen,
+        .body--bgHold h1,
+        .body--bgHold .denk-overlay {
+            pointer-events: none !important;
+        }
+    </style>
+    <style>
+        .nb-container {
+            position: fixed;
+            left: 12px;
+            bottom: 12px;
+            height: 50vh; /* max. halbe Fensterhöhe */
+            aspect-ratio: 915 / 1249; /* exakt dein Format */
+            z-index: 10000;
+        }
+
+        .nb-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain; /* gesamte Seite sichtbar */
+        }
+
+        .nb-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* gesamte Seite sichtbar */
+            pointer-events: none;
+            opacity: 1; /* falls mal runtergeregelt war */
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,.5)); /* Schatten folgt der PNG-Form, wie beim Icon */
+        }
+
+        .nb-overlay {
+            position: absolute;
+            inset: 0;
+            overflow: auto;
+            padding: 14px 16px 16px;
+            padding-top: clamp(30px, 5vh, 72px); /* min 24px, typ. ~4% der Viewporthöhe, max 72px */
+            line-height: 1.35;
+            font-size: .95rem;
+            color: #111;
+            background: linear-gradient(to bottom, rgba(255,255,255,.28), rgba(255,255,255,.14)); /* transparenter */
+        }
+
+        .nb-title {
+            font-weight: 600;
+            margin: 0 0 8px 0;
+        }
+
+        .nb-list {
+            margin: 0;
+            padding-left: 1.05em;
+        }
+
+        .nb-item {
+            margin: 4px 0;
+        }
+
+        .nb-meta {
+            opacity: .75;
+            font-size: .85em;
+        }
+        /* Wrapper um das 1. Personenbild, damit wir absolut positionieren können */
+        .person-wrap {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* kleines Notizbuch-Icon unten links auf dem Bild */
+        .nb-badge {
+            position: fixed; /* Body-Ebene: Position wird per JS an der Figur gehalten */
+            width: 34px;
+            height: 34px;
+            object-fit: contain; /* Seitenverhältnis erhalten, nicht eckig beschneiden */
+            padding: 0;
+            border-radius: 10px;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,.5));
+            z-index: 10001; /* über dem Buch-Overlay (9000) und dem Notizbuch (10000), immer klickbar */
+            opacity: 1 !important; /* überschreibt globales img { opacity: 0 } */
+            pointer-events: auto !important;
+            cursor: pointer !important;
+        }
+
+        /* Notizbuch unten links: standardmäßig versteckt, per .open sichtbar */
+        #notebook-root {
+            display: none;
+        }
+
+            #notebook-root.open {
+                display: block;
+            }
+    </style>
+    <!-- ===== Buch UI ===== -->
+    <style>
+        /* Toggle-Button unten rechts */
+        #buch-toggle {
+            position: fixed;
+            right: 16px;
+            bottom: 16px;
+            width: 120px;
+            height: 136px;
+            z-index: 10000;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+            #buch-toggle img {
+                opacity: 1 !important;
+            }
+
+        #buch-pointer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 110px;
+            height: 110px;
+            pointer-events: none;
+            background: url('imgEleven/pfeilRechts.png') no-repeat center/contain;
+            opacity: 0;
+            z-index: 11000;
+            animation: buchPointerFlight 2.6s ease-in-out infinite;
+            animation-play-state: paused;
+            animation-fill-mode: both;
+        }
+
+        #buch-pointer.visible {
+            animation-play-state: running;
+        }
+
+        @keyframes buchPointerFlight {
+            0% { transform: translate(-40px,-40px) rotate(45deg) scale(0.85); opacity: 0; }
+            15% { opacity: 1; }
+            55% { transform: translate(calc(100vw - 200px), calc(100vh - 220px)) rotate(45deg) scale(1.05); opacity: 1; }
+            80% { opacity: 0; transform: translate(calc(100vw - 200px), calc(100vh - 220px)) rotate(45deg) scale(1.05); }
+            100% { transform: translate(-40px,-40px) rotate(45deg) scale(0.85); opacity: 0; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #buch-pointer {
+                animation: none;
+                opacity: 0;
+            }
+        }
+
+        #buch-overlay {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9000;
+            background: rgba(0,0,0,0.4);
+        }
+
+            #buch-overlay.open {
+                display: flex;
+            }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        /* Bühne: 80% der Bildschirmhöhe */
+        .buch-stage {
+            position: relative;
+            height: 80vh;
+            width: auto;
+        }
+
+        /* Sichtbarkeit trotz globalem img{opacity:0} */
+        .buch-img, .buch-page, .buch-arrow {
+            opacity: 1;
+        }
+
+        /* Buch-Hintergrund (z=1) */
+        .buch-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Seite (z=2) – Box innerhalb des Buches per Variablen fein einstellbar */
+        .buch-page {
+            position: absolute;
+            z-index: 2;
+            top: var(--page-top,4%);
+            bottom: var(--page-bottom,4%);
+            left: var(--page-left,14%);
+            right: var(--page-right,6%);
+            max-width: calc(100% - var(--page-left,14%) - var(--page-right,6%));
+            max-height: calc(100% - var(--page-top,4%) - var(--page-bottom,4%));
+            margin: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            /*box-shadow: 0 2px 18px rgba(0,0,0,.25);*/
+            box-shadow: none;
+        }
+
+        #buch-imgPage {
+            width: 100%;
+            height: 100%;
+        }
+
+        #buch-videoPage {
+            width: 100%;
+            height: 100%;
+            background: #000;
+        }
+
+
+        /* Pfeile (z=3), neben dem Buch zentriert */
+        .buch-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: clamp(36px, 4vw, 60px);
+            height: auto;
+            cursor: pointer;
+            z-index: 3;
+            user-select: none;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,.35));
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+            .buch-arrow:hover {
+                opacity: 1;
+            }
+
+            /* jetzt innerhalb des Buchbereichs */
+            .buch-arrow.left {
+                left: -0%; /* Abstand von der linken Buchkante */
+            }
+
+            .buch-arrow.right {
+                right: -0%; /* Abstand von der rechten Buchkante */
+            }
+
+            .buch-arrow[aria-disabled="true"] {
+                opacity: .25;
+                pointer-events: none;
+            }
+    </style>
+</head>
+<body>
+    <h1 id="ueberschrift"></h1>
+
+    <div class="personen"></div>
+    <div id="textzeile" style="text-align: center; font-size: 1.2em; visibility: hidden;"></div>
+
+    <div class="szene">
+    </div>
+    <div id="notebook-root" class="nb-container" aria-label="Notizbuch">
+        <div class="nb-inner">
+            <img class="nb-img" alt="Leeres Notizbuch" />
+            <div class="nb-overlay" id="notebook-overlay">
+                <h4 class="nb-title">Notizen</h4>
+                <!-- Liste wird per JS befüllt -->
+            </div>
+        </div>
+    </div>
+
+    <!-- BuchToggle unten rechts -->
+    <button id="buch-toggle" aria-label="Buch öffnen/schließen" title="Buch" style="display:none;">
+        <img src="imgEleven/buch.png" alt="Buch öffnen" style="width:100%;height:100%;object-fit:contain;">
+    </button>
+
+    <div id="buch-pointer" aria-hidden="true"></div>
+
+    <!-- Overlay -->
+    <div id="buch-overlay" tabindex="-1" aria-hidden="true">
+        <div id="buch-stage" class="buch-stage" style="--page-left:14%; --page-right:6%; --page-top:4%; --page-bottom:4%;">
+            <!-- Buch-Hintergrund -->
+            <img class="buch-img" id="buch-bg" src="imgEleven/buch.png" alt="Buchhintergrund">
+
+            <!-- Seite als Bild -->
+            <img class="buch-page" id="buch-imgPage" alt="Seite">
+
+            <!-- Seite als Video -->
+            <video class="buch-page" id="buch-videoPage" playsinline muted controls preload="metadata"></video>
+
+            <!-- Pfeile -->
+            <img class="buch-arrow left" id="buch-prev" src="imgEleven/pfeilLinks.png" alt="Zurück">
+            <img class="buch-arrow right" id="buch-next" src="imgEleven/pfeilRechts.png" alt="Weiter">
+        </div>
+    </div>
+
+    <!-- ?v= beim Austausch des Bildes hochzaehlen, sonst zeigt der Browser das alte aus dem Cache -->
+    <img id="erzaehlerBild" src="imgEleven/erzaehler.png?v=20261018" style="
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    z-index: 1;
+    max-width: 100%;
+    max-height: 100%;
+    ">
+
+    <script>
+        // Oeffentliche Fassung (GitHub Pages): ElevenLabs direkt mit dem eigenen Schluessel
+        // des Spielers, Spielstand im Browser. Ohne Einrichtung zuerst zu einrichten.html.
+        window.KRIMIZEIT_OEFFENTLICH = true;
+        if (!localStorage.getItem("krimizeit_schluessel") || !localStorage.getItem("krimizeit_agent")) {
+            location.replace("einrichten.html");
+        }
+    </script>
+    <script type="module" src="eleven.js?v=63"></script>
+    <script type="module" src="extras.js?v=63"></script>
+
+</body>
+</html>
+
+

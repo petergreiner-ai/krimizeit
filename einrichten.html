@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KrimiZeit einrichten</title>
+    <link rel="stylesheet" href="seiten.css">
+</head>
+<body>
+    <main class="karte">
+        <h1>KrimiZeit einrichten</h1>
+        <p>
+            Die Figuren sprechen über <a href="https://elevenlabs.io" target="_blank" rel="noopener">ElevenLabs</a>.
+            Dafür brauchst du ein eigenes ElevenLabs-Konto und einen API-Schlüssel. Die Gespräche
+            laufen über dein Konto und werden dort abgerechnet.
+        </p>
+
+        <h2>1. Schlüssel anlegen</h2>
+        <ol>
+            <li>Bei ElevenLabs anmelden, dann <b>Developers → API Keys → Create API Key</b>.</li>
+            <li>Diese Rechte freigeben:
+                <ul>
+                    <li><b>Text to Speech</b>: Zugriff</li>
+                    <li><b>ElevenLabs Agents</b>: Schreiben (Write)</li>
+                    <li><b>Voices</b>: Lesen (Read)</li>
+                </ul>
+            </li>
+            <li>Den Schlüssel (beginnt mit <code>sk_</code>) unten einfügen.</li>
+        </ol>
+
+        <h2>2. Einrichten</h2>
+        <form id="formular">
+            <label for="schluessel">ElevenLabs-API-Schlüssel</label>
+            <input id="schluessel" type="password" autocomplete="off" spellcheck="false" placeholder="sk_…" required>
+            <button type="submit" id="los">Prüfen und einrichten</button>
+        </form>
+        <div id="protokoll" aria-live="polite"></div>
+
+        <p class="hinweis">
+            Der Schlüssel wird <b>nur in diesem Browser</b> gespeichert (localStorage) und nur an
+            <code>api.elevenlabs.io</code> geschickt. Die Einrichtung legt in deinem Konto einen Agenten
+            „KrimiZeit“ mit drei Werkzeugen an. Ein zweiter Durchlauf verwendet diese wieder.
+        </p>
+
+        <div id="fertig" hidden>
+            <h2>Fertig!</h2>
+            <p><a class="knopf" href="index.html">Zu den Spielen</a></p>
+        </div>
+
+        <p class="klein">
+            <a href="#" id="vergessen">Schlüssel und Einrichtung in diesem Browser vergessen</a>
+        </p>
+    </main>
+
+    <script>
+        const API = "https://api.elevenlabs.io";
+        const AGENT_NAME = "KrimiZeit";
+        const protokoll = document.getElementById("protokoll");
+
+        function zeile(text, art = "") {
+            const p = document.createElement("p");
+            p.className = "zeile " + art;
+            p.textContent = text;
+            protokoll.appendChild(p);
+        }
+
+        async function api(key, methode, pfad, body) {
+            const res = await fetch(API + pfad, {
+                method: methode,
+                headers: { "xi-api-key": key, ...(body ? { "Content-Type": "application/json" } : {}) },
+                body: body ? JSON.stringify(body) : undefined
+            });
+            const text = await res.text();
+            let daten = {};
+            try { daten = text ? JSON.parse(text) : {}; } catch (e) { daten = { roh: text }; }
+            if (!res.ok) {
+                const d = daten.detail || {};
+                const err = new Error(d.message || ("HTTP " + res.status));
+                err.status = res.status;
+                err.code = d.status || d.code;
+                throw err;
+            }
+            return daten;
+        }
+
+        // Fehlende Rechte verstaendlich benennen (ElevenLabs: "missing the permission convai_read")
+        function erklaere(err) {
+            const m = /permission (\w+)/.exec(err.message || "");
+            if (m) {
+                const namen = { convai_read: "ElevenLabs Agents (Lesen)", convai_write: "ElevenLabs Agents (Schreiben)",
+                                voices_read: "Voices (Lesen)", text_to_speech: "Text to Speech" };
+                return "Dem Schlüssel fehlt das Recht „" + (namen[m[1]] || m[1]) + "“. Bitte bei ElevenLabs unter API Keys ergänzen.";
+            }
+            if (err.status === 401) return "Der Schlüssel wird nicht angenommen. Bitte prüfen, ob er vollständig kopiert ist.";
+            return err.message;
+        }
+
+        async function einrichten(key) {
+            const vorlage = await (await fetch("agent-vorlage.json")).json();
+
+            zeile("Prüfe den Schlüssel …");
+            await api(key, "GET", "/v1/convai/agents?page_size=1");
+            await api(key, "GET", "/v2/voices?page_size=1");
+            zeile("Schlüssel ist in Ordnung.", "ok");
+
+            // Werkzeuge: vorhandene gleichnamige Client-Tools wiederverwenden, sonst anlegen
+            zeile("Richte die Werkzeuge ein …");
+            const vorhanden = (await api(key, "GET", "/v1/convai/tools?page_size=100")).tools || [];
+            const toolIds = [];
+            for (const tc of vorlage.tools) {
+                const alt = vorhanden.find(t => t.tool_config && t.tool_config.type === "client" && t.tool_config.name === tc.name);
+                if (alt) {
+                    await api(key, "PATCH", "/v1/convai/tools/" + alt.id, { tool_config: tc });
+                    toolIds.push(alt.id);
+                } else {
+                    toolIds.push((await api(key, "POST", "/v1/convai/tools", { tool_config: tc })).id);
+                }
+            }
+            zeile("Werkzeuge bereit: " + vorlage.tools.map(t => t.name).join(", "), "ok");
+
+            // Agent: gespeicherten oder gleichnamigen wiederverwenden, sonst neu anlegen
+            const cfg = JSON.parse(JSON.stringify(vorlage.conversation_config));
+            cfg.agent.prompt.tool_ids = toolIds;
+            let agentId = localStorage.getItem("krimizeit_agent");
+            if (agentId) {
+                try { await api(key, "GET", "/v1/convai/agents/" + agentId); }
+                catch (e) { agentId = null; }
+            }
+            if (!agentId) {
+                const liste = (await api(key, "GET", "/v1/convai/agents?search=" + encodeURIComponent(AGENT_NAME))).agents || [];
+                agentId = (liste.find(a => a.name === AGENT_NAME) || {}).agent_id || null;
+            }
+            if (agentId) {
+                zeile("Aktualisiere den vorhandenen Agenten …");
+                await api(key, "PATCH", "/v1/convai/agents/" + agentId, { name: AGENT_NAME, conversation_config: cfg });
+            } else {
+                zeile("Lege den Agenten „" + AGENT_NAME + "“ an …");
+                agentId = (await api(key, "POST", "/v1/convai/agents/create", { name: AGENT_NAME, conversation_config: cfg })).agent_id;
+            }
+            zeile("Agent bereit.", "ok");
+
+            zeile("Teste die Verbindung …");
+            await api(key, "GET", "/v1/convai/conversation/token?agent_id=" + encodeURIComponent(agentId));
+            zeile("Verbindung klappt.", "ok");
+
+            localStorage.setItem("krimizeit_schluessel", key);
+            localStorage.setItem("krimizeit_agent", agentId);
+        }
+
+        document.getElementById("formular").addEventListener("submit", async e => {
+            e.preventDefault();
+            const knopf = document.getElementById("los");
+            const key = document.getElementById("schluessel").value.trim();
+            protokoll.innerHTML = "";
+            document.getElementById("fertig").hidden = true;
+            knopf.disabled = true;
+            try {
+                await einrichten(key);
+                document.getElementById("schluessel").value = "";
+                document.getElementById("fertig").hidden = false;
+            } catch (err) {
+                zeile(erklaere(err), "fehler");
+            } finally {
+                knopf.disabled = false;
+            }
+        });
+
+        document.getElementById("vergessen").addEventListener("click", e => {
+            e.preventDefault();
+            localStorage.removeItem("krimizeit_schluessel");
+            localStorage.removeItem("krimizeit_agent");
+            protokoll.innerHTML = "";
+            zeile("Schlüssel und Agenten-Verweis sind aus diesem Browser entfernt. Der Agent in deinem ElevenLabs-Konto bleibt bestehen.");
+        });
+
+        if (localStorage.getItem("krimizeit_schluessel") && localStorage.getItem("krimizeit_agent")) {
+            zeile("Dieser Browser ist bereits eingerichtet. Du kannst direkt spielen oder mit einem anderen Schlüssel neu einrichten.", "ok");
+            document.getElementById("fertig").hidden = false;
+        }
+    </script>
+</body>
+</html>

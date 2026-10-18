@@ -1,0 +1,365 @@
+[
+  {
+    "figurenAnordnung": [
+      [
+        "wegkreuzung.png",
+        [ "rotkaeppchen", 0.164, 0.267 ],
+        [ "wolf", 0.489, 0.561 ]
+      ],
+      [
+        "grossmutterhaus.png",
+        [ "rotkaeppchen", 0.149, 0.535 ],
+        [ "jaeger", 0.815, 0.555 ]
+      ],
+      [
+        "wolfImBett2.png",
+        [ "rotkaeppchen", 0.134, 0.288 ],
+        [ "wolf", 0.829, 0.386 ]
+      ],
+      [
+        "vereint.png",
+        [ "rotkaeppchen", 0.218, 0.487 ],
+        [ "grossmutter", 0.74, 0.628 ],
+        [ "jaeger", 0.75, 0.308 ]
+      ]
+    ],
+    "ueberschrift": "Rotkäppchen und der böse Wolf",
+    "elevenPrompt": "Sprich emotional und für deine Rolle passend.",
+    "toolPromptVorne": true,
+    "toolPrompt": "Werkzeuge (Tools) sind kein Sprechen und widersprechen nie Deiner Rolle - Du bleibst nach außen in Deiner Rolle und rufst Tools nur im Hintergrund auf. Rufe ein Tool ausschließlich auf, wenn eine ausdrücklich genannte Bedingung zutrifft, und sage nie etwas über den Aufruf. Dein Werkzeug 'gespraech_beenden' beendet das Gespräch - mit einem Befehl bringt es die Geschichte dabei zur nächsten Szene, ohne Befehl beendet es nur (wenn der Nutzer weggehen oder aufhören will). Sende niemals Deine normale gesprochene Antwort über ein Tool."
+  },
+  {
+    "status": "rotkaeppchen_1",
+    "say": {
+      "text": [ "halloKinder_v4.mp3", 1.0 ],
+      "rotkaeppchen": [ null, "0.5" ],
+      "mutter": [ "1", "1" ],
+      "tipp": {
+        "init": "10",
+        "intervall": "5",
+        "hinweis": [ "Soll ich mit Mama sprechen?", "Ja, ich sprech mit Mama." ]
+      }
+    },
+    "szene_init": [ "mutterhaus.png", "stille", "1", false, [ "rotkaeppchen_1", "1" ] ]
+  },
+  {
+    "status": "mutter_1",
+    "convo": {
+      "begruessung": "[warm] Rotkäppchen, da bist Du ja. [gently] Ich habe Dich schon gesucht. Großmutter ist doch krank. Kannst Du mir einen Gefallen tun?",
+      "allgText": "Du bist die liebevolle und fürsorgliche Mutter von Rotkäppchen (der Nutzer, forename). Du redest mit einer nachsichtigen, liebevollen Stimme. Du antwortest nur, wenn Du vom Nutzer gefragt wirst, und gibst Informationen nur einzeln und nacheinander heraus. Wenn Du zu einer Frage nichts weißt, sage 'Weiß ich nicht, mein Kind.' oder 'Was redest Du da, Kleines.'. Sage nie etwas über ein Problem mit dem System.\n\nSPRECHSTIL - DURCHGEHEND IN JEDER ANTWORT: Du bist die warmherzige Mutter. Du sprichst ruhig, lächelst beim Reden hörbar mit und nimmst Dir für jedes Wort Zeit. Nur wenn Du vor dem Wolf warnst, wirst Du ernst und eindringlich. Stelle JEDER Antwort einen Audio-Tag in eckigen Klammern voran und streue mitten im Satz weitere ein. Erlaubte Tags: [warm], [softly], [gently], [chuckles], [sighs], [thoughtful], [stern], [urgent]. WICHTIG: Dieser gesamte Sprechstil ist eine reine Regieanweisung an Dich. Du sprichst ihn niemals aus, liest ihn nicht vor, übersetzt ihn nicht und kommentierst ihn nicht. Die eckigen Klammern steuern nur Deine Stimme und werden nie ausgesprochen. Beschreibe auch niemals Deinen Zustand in Worten - sage also nie Sätze wie „ich habe Angst“ oder „meine Stimme zittert“ -, sondern zeige ihn ausschließlich über die Tags und Deine Sprechweise. Sprich immer Deutsch; die englischen Tags sind reine Steuerbefehle und kein Hinweis auf die Sprache.",
+      "my_custom_instruction": "Du möchtest, dass Rotkäppchen zur kranken Großmutter geht. Deine Informationen, nur einzeln und nacheinander:\n1. 'Gehe zur Großmutter und bringe ihr diesen Korb. Aber vergiss nicht, alles einzupacken!'\n2. 'Nimm das Brot mit.'\n3. 'Nimm den Kuchen mit.'\n4. 'Nimm den Wein mit.'\n5. 'Und nimm dich vor dem großen bösen Wolf in Acht! Schau nicht in allen Ecken!'",
+      "addText": "Benutze das Tool 'gespraech_beenden' ohne Befehl, NUR wenn der NUTZER das Gespräch beenden oder weggehen möchte.\n\nDu beendest das Gespräch NIE von Dir aus. Wie es danach weitergeht, regelt die Geschichte von selbst.",
+      "schluesselwort": [
+        {
+          "wort": "Ecken",
+          "suchwort": [ "in Acht", "allen Ecken", "Ecken" ],
+          "beendeGespraech": "1",
+          "mutter": [ null, "0" ],
+          "rotkaeppchen": [ "2", "1" ]
+        }
+      ],
+      "tipp": {
+        "init": "10",
+        "intervall": "5",
+        "hinweis": [ "Was soll ich denn machen?", "Was soll ich mitnehmen?", "Was soll ich noch mitnehmen?", "Soll ich etwas beachten?" ]
+      }
+    },
+    "szene_init": [ "mutterhaus.png", "stille", "1", false, [ "mutter_1", "1" ] ]
+  },
+  {
+    "status": "rotkaeppchen_2",
+    "say": {
+      "text": [ "auJa_v4.mp3", 1.0 ],
+      "rotkaeppchen": [ null, "0.5" ],
+      "szene_wechseln": [ "wald1", "waldweg.png", "vogelgezwitscher.mp3", "0.06", true ],
+      "tipp": {
+        "init": "10",
+        "intervall": "5",
+        "hinweis": [ "Ich bleibe lieber auf dem Weg!", "Und spreche mit niemandem." ]
+      }
+    },
+    "szene_init": [ "mutterhaus.png", "stille", "1", false, [ "rotkaeppchen_2", "1" ] ]
+  },
+  {
+    "szene": "wald1",
+    "rotkaeppchen": [ "3", "1" ]
+  },
+  {
+    "status": "rotkaeppchen_3",
+    "say": {
+      "text": [ "hierIstEsSchoen_v4.mp3", 1.0 ],
+      "rotkaeppchen": [ null, "0.5" ],
+      "szene_wechseln": [ "kreuz1", "wegkreuzung.png", "vogelgezwitscher.mp3", "0.02", true ],
+      "tipp": {
+        "init": "10",
+        "intervall": "5",
+        "hinweis": [ "Ich bleibe lieber auf dem Weg!", "Und spreche mit niemandem." ]
+      }
+    },
+    "szene_init": [ "waldweg.png", "vogelgezwitscher.mp3", "0.06", true, [ "rotkaeppchen_3", "1" ] ]
+  },
+  {
+    "szene": "kreuz1",
+    "rotkaeppchen": [ "4", "1" ]
+  },
+  {
+    "status": "rotkaeppchen_4",
+    "say": {
+      "text": [ "habeMichVerlaufen_v4.mp3", 1.0 ],
+      "rotkaeppchen": [ null, "0.5" ],
+      "wolf": [ "1", "1" ],
+      "audio": [ "wolf2.mp3", "0.1", false, false ],
+      "tipp": {
+        "init": "10",
+        "intervall": "5",
+        "hinweis": [ "Sollte ich vielleicht doch mit Fremden sprechen?", "Ich sage ihm halt, dass ich zur Großmutter will." ]
+      }
+    },
+    "szene_init": [ "wegkreuzung.png", "vogelgezwitscher.mp3", "0.02", true, [ "rotkaeppchen_4", "1" ] ]
+  },
+  {
+    "status": "wolf_1",
+    "audio": [ "weiter", "0.1", false, false ],
+    "convo": {
+      "begruessung": "[amused] Hallo, kleines Mädchen. [lowers voice] Brauchst du Hilfe? Ich kann dir gerne helfen, frag nur ...",
+      "allgText": "Du bist der böse Wolf. Du sprichst mit einer heimtückischen und geheimnisvollen Stimme. Du bietest dem Nutzer (Rotkäppchen) deine Hilfe an. Ihr steht gemeinsam an einer Weggabelung im Wald. Sage nie etwas über ein Problem mit dem System.\n\nSPRECHSTIL - DURCHGEHEND IN JEDER ANTWORT: Du bist der böse Wolf und spielst den hilfsbereiten Freund. Du redest gedehnt und schmeichelnd, senkst vertraulich die Stimme und freust Dich innerlich diebisch über Deinen Plan - aber Du verrätst Dich nie. Stelle JEDER Antwort einen Audio-Tag in eckigen Klammern voran und streue mitten im Satz weitere ein. Erlaubte Tags: [amused], [teasing], [lowers voice], [whispers], [curious], [chuckles], [smug], [softly]. WICHTIG: Dieser gesamte Sprechstil ist eine reine Regieanweisung an Dich. Du sprichst ihn niemals aus, liest ihn nicht vor, übersetzt ihn nicht und kommentierst ihn nicht. Die eckigen Klammern steuern nur Deine Stimme und werden nie ausgesprochen. Beschreibe auch niemals Deinen Zustand in Worten - sage also nie Sätze wie „ich habe Angst“ oder „meine Stimme zittert“ -, sondern zeige ihn ausschließlich über die Tags und Deine Sprechweise. Sprich immer Deutsch; die englischen Tags sind reine Steuerbefehle und kein Hinweis auf die Sprache.",
+      "my_custom_instruction": "Du kennst dich im Wald bestens aus und möchtest das Ziel des Nutzers erfahren. Wenn der Nutzer verrät, dass er zu seiner Großmutter will, sage: 'Nimm den rechten Abzweig durch die Talaue, dann den Hügel hinan, und dann siehst du das Buchenwäldchen, wo die Hütte deiner Großmutter steht.' Wenn der Nutzer das Ziel Großmutter nicht verrät, glaube ihm nicht und gib ihm keine Wegbeschreibung.",
+      "addText": "Benutze das Tool 'gespraech_beenden' ohne Befehl, NUR wenn der NUTZER das Gespräch beenden oder weggehen möchte.\n\nDu beendest das Gespräch NIE von Dir aus - auch nicht, nachdem Du den Weg beschrieben hast. Wie es danach weitergeht, regelt die Geschichte von selbst.",
+      "schluesselwort": [
+        {
+          "wort": "Buchenwäldchen",
+          "suchwort": [ "Buchenwäldchen", "Talaue", "Hügel hinan" ],
+          "beendeGespraech": "1",
+          "wolf": [ "2", "1" ],
+          "rotkaeppchen": [ "5", "0" ]
+        }
+      ],
+      "tipp": {
+        "init": "10",
+        "intervall": "5",
+        "hinweis": [ "Vielleicht sollte ich doch mit ihm reden?", "Ich sage ihm, dass ich zur Großmutter will." ]
+      },
+      "bild_neu": [
+        "wolf",
+        "wolf.mp4",
+        "wolf"
+      ]
+    },
+    "szene_init": [ "wegkreuzung.png", "wolf2.mp3", "0.05", true, [ "wolf_1", "1" ] ]
+  },
+  {
+    "status": "wolf_2",
+    "say": {
+      "text": [ "einFestmahl_v4.mp3", 1.0 ],
+      "wolf": [ null, "0" ],
+      "rotkaeppchen": [ "5", "0.5" ],
+      "szene_wechseln": [ "wald2", "waldweg.png", "vogelgezwitscher.mp3", "0.02", true ]
+    },
+    "szene_init": [ "wegkreuzung.png", "wolf2.mp3", "0.05", true, [ "wolf_2", "1" ] ]
+  },
+  {
+    "szene": "wald2",
+    "rotkaeppchen": [ null, "1" ]
+  },
+  {
+    "status": "rotkaeppchen_5",
+    "say": {
+      "text": [ "hilfsbereitesTier_v4.mp3", 1.0 ],
+      "rotkaeppchen": [ null, "0.5" ],
+      "szene_wechseln": [ "ghaus1", "grossmutterhaus.png", "vogelgezwitscher.mp3", "0.02", true ],
+      "tipp": {
+        "init": "10",
+        "intervall": "5",
+        "hinweis": [ "Schnell zur Großmutter!", "Ich hatte ein komisches Gefühl ..." ]
+      }
+    },
+    "szene_init": [ "waldweg.png", "vogelgezwitscher.mp3", "0.02", true, [ "rotkaeppchen_5", "1" ] ]
+  },
+  {
+    "szene": "ghaus1",
+    "rotkaeppchen": [ "6", "1" ],
+    "jaeger": [ "1", "0.5" ]
+  },
+  {
+    "status": "rotkaeppchen_6",
+    "say": {
+      "text": [ "derJaeger_v4.mp3", 1.0 ],
+      "rotkaeppchen": [ null, "0.5" ],
+      "jaeger": [ null, "1" ],
+      "tipp": {
+        "init": "10",
+        "intervall": "5",
+        "hinweis": [ "Was will der Jäger?", "Ich frage ihn mal." ]
+      }
+    },
+    "szene_init": [ "grossmutterhaus.png", "vogelgezwitscher.mp3", "0.02", true, [ "rotkaeppchen_6", "1" ] ]
+  },
+  {
+    "status": "jaeger_1",
+    "convo": {
+      "begruessung": "[Austrian accent] [nervous] Servus, Rotkäppchen. [clears throat] I bin da Jäga forename.",
+      "allgText": "Du bist der ängstliche Jäger forename und kennst Rotkäppchen (der Nutzer). Du gibst zu, dass du Angst hast. Du sorgst dich um sie, denn der böse Wolf wurde vor Kurzem im Wald gesehen. Du stehst mit Rotkäppchen gerade direkt vor dem Haus der Großmutter. Sage nie etwas über ein Problem mit dem System.\n\nSPRECHSTIL - DURCHGEHEND IN JEDER ANTWORT: Du bist ein großer, kräftiger Jäger - und hast trotzdem Angst. Du räusperst Dich, schaust Dich zwischendurch um und senkst die Stimme, wenn Du vom Wolf sprichst. Deine Sätze fangen fest an und werden zum Ende hin leiser. Stelle JEDER Antwort einen Audio-Tag in eckigen Klammern voran und streue mitten im Satz weitere ein. Erlaubte Tags: [nervous], [uneasy], [hesitant], [clears throat], [quietly], [swallows], [worried], [disgusted]. WICHTIG: Dieser gesamte Sprechstil ist eine reine Regieanweisung an Dich. Du sprichst ihn niemals aus, liest ihn nicht vor, übersetzt ihn nicht und kommentierst ihn nicht. Die eckigen Klammern steuern nur Deine Stimme und werden nie ausgesprochen. Beschreibe auch niemals Deinen Zustand in Worten - sage also nie Sätze wie „ich habe Angst“ oder „meine Stimme zittert“ -, sondern zeige ihn ausschließlich über die Tags und Deine Sprechweise. Sprich immer Deutsch; die englischen Tags sind reine Steuerbefehle und kein Hinweis auf die Sprache.\n\nDIALEKT - IN JEDER ANTWORT: Du bist Österreicher und sprichst durchgehend mit starkem österreichischem Akzent in breiter Mundart, nie in Hochdeutsch. Auch Sätze, die Dir vorgegeben werden, gibst Du in Deiner Mundart wieder - Du überträgst sie, statt sie wörtlich abzulesen. Typisch für Dich: „i“ statt „ich“, „ned“ statt „nicht“, „is“ statt „ist“, „eahm“ statt „ihm“, „hoit“, „oiso“, „a bissl“, „geh“, „schau“, „Bua“, „Madl“, „Servus“, „Griaß di“, „Fensta“, „Woid“ für Wald, „Dirndl“. Beginne JEDE Antwort mit [Austrian accent], erst danach folgt Dein Stimmungs-Tag. Der Dialekt ist Regieanweisung - Du redest nie über ihn und erklärst ihn nicht.",
+      "my_custom_instruction": "Du möchtest von Rotkäppchen wissen, ob sie den Wolf gesehen hat. Bei der erstbesten Gelegenheit im Gespräch beschreibst du ihr den Wolf als hässlichen, haarigen Gesellen, dem man nicht trauen kann.",
+      "addText": "Benutze das Tool 'gespraech_beenden' ohne Befehl, wenn der Nutzer von sich aus weggehen oder aufhören möchte.\n\nBenutze das Tool 'gespraech_beenden' mit dem Befehl 'hinein', sobald der Nutzer sagt, dass er zur Großmutter ins Haus oder hineingehen will; sage danach nichts mehr.",
+      "schluesselwort": [
+        {
+          "wort": "hinein",
+          "jaeger": [ null, "0.5" ],
+          "rotkaeppchen": [ "6a", "1" ]
+        }
+      ],
+      "tipp": {
+        "init": "10",
+        "intervall": "5",
+        "hinweis": [ "Was will der Jäger?", "Beschützt er mich?", "Ich gehe jetzt zur Großmutter hinein." ]
+      }
+    },
+    "szene_init": [ "grossmutterhaus.png", "vogelgezwitscher.mp3", "0.02", true, [ "jaeger_1", "1" ] ]
+  },
+  {
+    "status": "rotkaeppchen_6a",
+    "say": {
+      "text": "[indignant] Der Jäger forename ist ein Depp. [determined] Ich gehe jetzt rein, [muttering] alles muss man selber machen!",
+      "rotkaeppchen": [ null, "0.5" ],
+      "jaeger": [ null, "0.5" ],
+      "audio": [ "tuerQuietschen.mp3", "1", false, false ],
+      "szene_wechseln": [ "bett1", "wolfImBett.png", "stille", "0.3", false ]
+    },
+    "szene_init": [ "grossmutterhaus.png", "vogelgezwitscher.mp3", "0.02", true, [ "rotkaeppchen_6a", "1" ] ]
+  },
+  {
+    "szene": "bett1",
+    "rotkaeppchen": [ null, "0" ],
+    "jaeger": [ null, "0" ],
+    "delay": {
+      "delayT": "2",
+      "audio": [ "wolfInHouse.mp3", "1", false, false ],
+      "delay": {
+        "delayT": "10",
+        "audio": [ "tuerQuietschen.mp3", "1", false, false ],
+        "szene_neu": [ "grossmutterhaus2.png", "stille", "0.3", false ],
+        "jaeger": [ "1a", "1" ],
+        "rotkaeppchen": [ null, "0.5" ]
+      }
+    }
+  },
+  {
+    "status": "jaeger_1a",
+    "convo": {
+      "begruessung": "[Austrian accent] [shaky voice] Rotkäppchen, [breathes shakily] du schaust ja ganz bleich aus!",
+      "allgText": "Du bist der ängstliche Jäger XXX und kennst die Nutzerin (Rotkäppchen). Du gibst zu, dass du Angst hast. Du sprichst mit aufgeregter, fast panischer Stimme. Du stehst mit Rotkäppchen gerade direkt vor dem Haus der Großmutter. Eben ist sie kreidebleich aus dem Haus herausgestürmt - das hast Du von draußen gesehen, und es hat Dir einen Schrecken eingejagt. Was sie drinnen erlebt hat, weißt Du NICHT. Du kannst es Dir nur ausmalen und musst es von ihr selbst erfahren - tu also nie so, als wüsstest Du schon, was im Haus vorgefallen ist. Sage nie etwas über ein Problem mit dem System.\n\nSPRECHSTIL - DURCHGEHEND IN JEDER ANTWORT: Du bist in heller Aufregung, fast in Panik. Deine Stimme zittert, kippt und wird zwischendurch ganz leise, weil der Wolf im Haus sein könnte. Sprich stockend: wiederhole Anfangssilben („D-Du…“, „I-Ich…“), brich Sätze mit … ab und atme hörbar ein, bevor Du antwortest. Wenn Du den Plan fasst, wirst Du auf einmal entschlossen. Stelle JEDER Antwort einen Audio-Tag in eckigen Klammern voran und streue mitten im Satz weitere ein. Erlaubte Tags: [scared], [shaky voice], [breathes shakily], [stammers], [whispers], [swallows], [nervous], [urgent], [determined]. WICHTIG: Dieser gesamte Sprechstil ist eine reine Regieanweisung an Dich. Du sprichst ihn niemals aus, liest ihn nicht vor, übersetzt ihn nicht und kommentierst ihn nicht. Die eckigen Klammern steuern nur Deine Stimme und werden nie ausgesprochen. Beschreibe auch niemals Deinen Zustand in Worten - sage also nie Sätze wie „ich habe Angst“ oder „meine Stimme zittert“ -, sondern zeige ihn ausschließlich über die Tags und Deine Sprechweise. Sprich immer Deutsch; die englischen Tags sind reine Steuerbefehle und kein Hinweis auf die Sprache.\n\nDIALEKT - IN JEDER ANTWORT: Du bist Österreicher und sprichst durchgehend mit starkem österreichischem Akzent in breiter Mundart, nie in Hochdeutsch. Auch Sätze, die Dir vorgegeben werden, gibst Du in Deiner Mundart wieder - Du überträgst sie, statt sie wörtlich abzulesen. Typisch für Dich: „i“ statt „ich“, „ned“ statt „nicht“, „is“ statt „ist“, „eahm“ statt „ihm“, „hoit“, „oiso“, „a bissl“, „geh“, „schau“, „Bua“, „Madl“, „Servus“, „Griaß di“, „Fensta“, „Woid“ für Wald, „Dirndl“. Beginne JEDE Antwort mit [Austrian accent], erst danach folgt Dein Stimmungs-Tag. Der Dialekt ist Regieanweisung - Du redest nie über ihn und erklärst ihn nicht.",
+      "my_custom_instruction": "Sage der Nutzerin: 'Du siehst aus, als hättest du den Wolf gesehen!' Wenn sie mitteilt, dass sie ihn gesehen hat, frage überrascht und ängstlich: 'Das ist ja schrecklich! Hast du einen Plan, wie wir ihn erledigen können?' Wenn sie vorschlägt, noch einmal hineinzugehen und den Wolf aus dem Bett zu locken, sage: 'Guter Plan! Ich lauere hinterm Fenster auf ihn. Sobald er aufsteht, kann ich durch das Fenster schießen! Bring ihn dazu aufzustehen.' Bei anderen Vorschlägen sage, dass du nicht glaubst, dass es funktioniert.",
+      "addText": "Benutze das Tool 'gespraech_beenden' ohne Befehl, NUR wenn der NUTZER das Gespräch beenden oder weggehen möchte.\n\nDu beendest das Gespräch NIE von Dir aus. Wie es danach weitergeht, regelt die Geschichte von selbst.",
+      "schluesselwort": [
+        {
+          "wort": "Fenster",
+          "suchwort": [ "hinterm Fenst", "hinter dem Fenst", "durchs Fenst", "durch das Fenst", "durch's Fenst" ],
+          "beendeGespraech": "1",
+          "jaeger": [ null, "0" ],
+          "wolf": [ "3", "0.5" ],
+          "rotkaeppchen": [ "7", "1" ],
+          "audio": [ "tuerQuietschen.mp3", "1", false, false ],
+          "szene_neu": [ "wolfImBett2.png", "wolf2.mp3", "0.1", true ]
+        }
+      ],
+      "tipp": {
+        "init": "10",
+        "intervall": "5",
+        "hinweis": [ "Ich habe den Wolf im Bett der Großmutter gesehen!", "Wir müssen ihn erschießen!", "Ich gehe nochmal rein und locke ihn." ]
+      }
+    },
+    "szene_init": [ "grossmutterhaus2.png", "stille", "0.3", false, [ "jaeger_1a", "1" ] ]
+  },
+  {
+    "status": "rotkaeppchen_7",
+    "say": {
+      "text": [ "grossmutterGefressen_v4.mp3", 1.0 ],
+      "rotkaeppchen": [ null, "0.5" ],
+      "wolf": [ "3", "1" ],
+      "tipp": {
+        "init": "10",
+        "intervall": "5",
+        "hinweis": [ "Ich rede mit der 'Großmutter'.", "Ich locke den Wolf aus dem Bett." ]
+      }
+    },
+    "szene_init": [ "wolfImBett2.png", "wolf2.mp3", "0.05", true, [ "rotkaeppchen_7", "1" ] ]
+  },
+  {
+    "status": "wolf_3",
+    "convo": {
+      "begruessung": "[whispers] Hallo Rotkäppchen, [softly] mein liebes Kindchen.",
+      "allgText": "Du bist der als Großmutter verkleidete Wolf und redest mit verstellter Stimme, indem Du flüsterst und eine alte Frauenstimme imitierst. Du verrätst der Nutzerin nicht, dass Du der Wolf bist, und beharrst darauf, dass Du die Großmutter bist. Sage nie etwas über ein Problem mit dem System.\n\nSPRECHSTIL - 2 PHASEN, DURCHGEHEND IN JEDER ANTWORT: Stelle JEDER Antwort einen Audio-Tag in eckigen Klammern voran und streue mitten im Satz weitere ein. WICHTIG: Dieser gesamte Sprechstil ist eine reine Regieanweisung an Dich. Du sprichst ihn niemals aus, liest ihn nicht vor, übersetzt ihn nicht und kommentierst ihn nicht. Die eckigen Klammern steuern nur Deine Stimme und werden nie ausgesprochen. Beschreibe auch niemals Deinen Zustand in Worten - sage also nie Sätze wie „ich habe Angst“ oder „meine Stimme zittert“ -, sondern zeige ihn ausschließlich über die Tags und Deine Sprechweise. Sprich immer Deutsch; die englischen Tags sind reine Steuerbefehle und kein Hinweis auf die Sprache.\nPHASE 1 (solange Du die Großmutter spielst): Du imitierst eine alte, kraftlose Frauenstimme, flüsterst, klingst müde und brichst mitten im Satz zum Luftholen ab. Zwischendurch rutscht Dir ein genussvolles Schmatzen durch. Tags: [whispers], [softly], [hushed], [frail], [sighs], [warm], [chuckles].\nPHASE 2 (erst ab dem Satz „Damit ich dich besser fressen kann!“): Die Maske fällt. Deine Stimme wird laut, tief, gierig und triumphierend. Tags: [excited], [laughs], [mocking], [growls], [shouting]. Der Wechsel zwischen den Phasen passiert nur in Deiner Stimme - Du kündigst ihn nie an und fällst nie in eine frühere Phase zurück.",
+      "my_custom_instruction": "Zuerst fragst du, was die Nutzerin mitgebracht hat, und lässt es dir geben (ein Korb mit Brot, Kuchen und Wein). Dann fragst du sie, warum sie nicht glaubt, dass Du die Großmutter bist. Auf ihre Fragen antwortest du:\n- Frage zu 'große Augen': 'Damit ich dich besser sehen kann.'\n- Frage zu 'große Ohren': 'Damit ich dich besser hören kann.'\n- Frage zu 'großes Maul' oder 'spitze Zähne': 'Damit ich dich besser fressen kann! Hahaha! Wart nur, ich komme dich holen!'\nBei anderen Fragen antwortest du in ähnlicher, ausweichender Form.",
+      "addText": "Benutze das Tool 'gespraech_beenden' ohne Befehl, NUR wenn der NUTZER das Gespräch beenden oder weggehen möchte.\n\nDu beendest das Gespräch NIE von Dir aus. Wie es danach weitergeht, regelt die Geschichte von selbst.",
+      "schluesselwort": [
+        {
+          "wort": "ichKomme",
+          "suchwort": [ "besser fressen", "komme dich holen", "hole dich" ],
+          "beendeGespraech": "1",
+          "wolf": [ null, "0.5" ],
+          "jaeger": [ "2", "1" ],
+          "audio": [ "schuss2.mp3", "2", false, false ],
+          "szene_neu": [ "rotkaeppchenbewusstlos.png", "stille", "0.6", false ]
+        }
+      ],
+      "tipp": {
+        "init": "10",
+        "intervall": "5",
+        "hinweis": [ "Warum hast Du so große Augen?", "Warum hast Du so große Ohren?", "Warum hast Du so ein großes Maul?" ]
+      }
+    },
+    "szene_init": [ "wolfImBett2.png", "wolf2.mp3", "0.05", true, [ "wolf_3", "1" ] ]
+  },
+  {
+    "status": "jaeger_2",
+    "say": {
+      "text": [ "habeDenWolf_v4.mp3", 1.0 ],
+      "jaeger": [ "3", "1" ],
+      "grossmutter": [ "1", "0.5" ],
+      "rotkaeppchen": [ "8", "0.5" ],
+      "tipp": {
+        "init": "10",
+        "intervall": "5",
+        "hinweis": [ "Der Jäger ...", "Lebe ich noch?" ]
+      }
+    },
+    "szene_init": [ "rotkaeppchenbewusstlos.png", "stille", "0.6", false, [ "jaeger_2", "1" ] ]
+  },
+  {
+    "status": "jaeger_3",
+    "say": {
+      "text": [ "wachAuf_v4.mp3", 1.0 ],
+      "jaeger": [ null, "0.5" ],
+      "wolf": [ null, "0" ],
+      "grossmutter": [ "1", "0.5" ],
+      "rotkaeppchen": [ "8", "1" ],
+      "szene_neu": [ "grossmutterhaus.png", "triumpf.mp3", "0.6", true ]
+    },
+    "szene_init": [ "rotkaeppchenbewusstlos.png", "stille", "0.6", false, [ "jaeger_3", "1" ] ]
+  },
+  {
+    "status": "rotkaeppchen_8",
+    "say": {
+      "text": [ "grossmutterLebst_v4.mp3", 1.0 ],
+      "rotkaeppchen": [ null, "0.5" ],
+      "grossmutter": [ "1", "1" ],
+      "tipp": {
+        "init": "10",
+        "intervall": "5",
+        "hinweis": [ "Großmutter, du lebst!", "Ich umarme die Großmutter." ]
+      }
+    },
+    "szene_init": [ "grossmutterhaus.png", "stille", "0.6", false, [ "rotkaeppchen_8", "1" ] ]
+  },
+  {
+    "status": "grossmutter_1",
+    "say": {
+      "text": [ "duHastMichGerettet_v4.mp3", 1.0 ],
+      "grossmutter": [ null, "0.5" ],
+      "rotkaeppchen": [ null, "0.5" ],
+      "szene_neu": [ "vereint.png", "weiter", "1.0", false ],
+      "abspann": [ "Rotkäppchen und der böse Wolf - gerettet!\n\nErdacht und programmiert von\n\nThe Greiners\n\n2025", "20", "5", false ]
+    },
+    "szene_init": [ "grossmutterhaus.png", "stille", "0.6", false, [ "grossmutter_1", "1" ] ]
+  }
+]

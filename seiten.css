@@ -1,0 +1,77 @@
+/* Gemeinsames Aussehen der Rahmenseiten (Start, Einrichten, Anmeldung) der oeffentlichen Fassung */
+:root {
+    --hintergrund: #f0f0f0;
+    --karte: #ffffff;
+    --text: #222;
+    --leise: #666;
+    --rand: #444;
+    --akzent: #f7d774;
+    --ok: #1a7f37;
+    --fehler: #c00;
+}
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    padding: 24px 16px;
+    font-family: Georgia, "Times New Roman", serif;
+    background: var(--hintergrund);
+    color: var(--text);
+    line-height: 1.5;
+}
+.karte {
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--karte);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.15);
+}
+h1 { margin-top: 0; text-align: center; }
+h2 { font-size: 1.2em; margin-top: 1.6em; }
+a { color: #1a4f8b; }
+code { background: #f4f4f4; padding: 0 4px; border-radius: 4px; }
+label { display: block; font-weight: bold; margin-bottom: 6px; }
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 1.05em;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+button, .knopf {
+    display: inline-block;
+    background: white;
+    border: 2px solid var(--rand);
+    border-radius: 10px;
+    padding: 10px 24px;
+    font-size: 1.05em;
+    font-family: inherit;
+    color: var(--text);
+    cursor: pointer;
+    text-decoration: none;
+}
+button:hover, .knopf:hover { background: var(--akzent); }
+button:disabled { opacity: 0.5; cursor: wait; }
+.hinweis { color: var(--leise); font-size: 0.95em; }
+.klein { font-size: 0.85em; text-align: center; margin-top: 2em; }
+.zeile { margin: 4px 0; }
+.zeile.ok { color: var(--ok); }
+.zeile.ok::before { content: "✓ "; }
+.zeile.fehler { color: var(--fehler); font-weight: bold; }
+.spiele { display: flex; flex-direction: column; gap: 16px; margin: 24px 0; }
+.spiel {
+    display: block;
+    border: 2px solid var(--rand);
+    border-radius: 12px;
+    padding: 16px 20px;
+    text-decoration: none;
+    color: var(--text);
+    background: white;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.spiel:hover { background: var(--akzent); transform: scale(1.02); }
+.spiel b { font-size: 1.2em; display: block; }
+.spiel span { color: var(--leise); }
+.status { text-align: center; padding: 10px; border-radius: 8px; background: #fff7d6; }
+.status.ok { background: #e7f6ea; }

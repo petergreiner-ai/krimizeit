@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KrimiZeit</title>
+    <link rel="stylesheet" href="seiten.css">
+</head>
+<body>
+    <main class="karte">
+        <h1 id="spielTitel">KrimiZeit</h1>
+
+        <form id="loginForm">
+            <label for="name">Dein Name (Vor- und Nachname)</label>
+            <input type="text" id="name" required placeholder="Max Mustermann" autocomplete="name">
+            <button type="submit">Los geht's</button>
+        </form>
+
+        <h2>Spielanleitung</h2>
+        <p>
+            In diesem interaktiven Abenteuer steuerst du den Verlauf der Geschichte. Gib deinen
+            vollständigen Namen in der Form „Max Mustermann“ ein. Mit deinem echten Namen wird es
+            viel spannender, du wirst sehen. Hast du schon einmal gespielt, kannst du deinen
+            Fortschritt laden.
+        </p>
+        <p>
+            Achte auf Hinweise und klicke auf die Figuren. Mit den meisten kannst du reden (mit dir
+            selbst natürlich nicht). Du kannst nur Figuren anklicken, die nicht durchsichtig sind.
+            Erscheint bei dir eine Denkblase, bekommst du mit einem Klick eine Idee. Wächst die
+            Denkblase, fallen dir weitere Ideen ein.
+        </p>
+        <p class="hinweis">
+            Dein Name und dein Spielstand werden nur in diesem Browser gespeichert.
+        </p>
+        <p class="klein"><a href="index.html">← Zurück zur Spielauswahl</a></p>
+    </main>
+
+    <script>
+        // Oeffentliche Fassung: wie login.php/neustart.php, aber mit dem localStorage
+        // (Schluessel "krimizeit_spieler_<fall>", gleiche Struktur wie user.json).
+        const fall = (new URLSearchParams(location.search).get("fall") || "rb").replace(/[^A-Za-z0-9_-]/g, "");
+        const speicher = "krimizeit_spieler_" + fall;
+
+        if (!localStorage.getItem("krimizeit_schluessel") || !localStorage.getItem("krimizeit_agent")) {
+            location.replace("einrichten.html");
+        }
+
+        fetch(`${fall}/spielVerlauf.json?_=` + Date.now())
+            .then(r => r.json())
+            .then(d => { if (d[0] && d[0].ueberschrift) document.getElementById("spielTitel").textContent = d[0].ueberschrift; })
+            .catch(() => { });
+
+        function ladeAlle() {
+            try { return JSON.parse(localStorage.getItem(speicher) || "{}") || {}; } catch (e) { return {}; }
+        }
+
+        document.getElementById("loginForm").addEventListener("submit", e => {
+            e.preventDefault();
+            const name = document.getElementById("name").value.trim();
+            if (!name) return;
+            const alle = ladeAlle();
+            const u = alle[name];
+            if (u && u.spielstand != null) {
+                if (!confirm(`Spielstand gefunden (${u.spielstand}). Fortsetzen?`)) {
+                    alle[name] = { spielstand: "user_1", notizen: [], spielstandV: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] };
+                }
+            } else if (!u) {
+                alle[name] = { spielstand: null, spielstandV: [] };
+            }
+            localStorage.setItem(speicher, JSON.stringify(alle));
+            location.href = `index2.html?fall=${encodeURIComponent(fall)}&userName=${encodeURIComponent(name)}`;
+        });
+    </script>
+</body>
+</html>

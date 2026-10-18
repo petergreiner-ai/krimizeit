@@ -1,0 +1,101 @@
+[
+  {
+    "name": "mauwi",
+    "ersatzStimme": "KLBrrm88YPTNluCcvTrb",
+    "conversation_config": {
+      "tts": {
+        "model_id": "eleven_v4_turbo",
+        "voice_id": "zVF1o5NIPEsygZ2Jem17",
+        "supported_voices": [],
+        "expressive_mode": true,
+        "agent_output_audio_format": "pcm_16000",
+        "optimize_streaming_latency": 4,
+        "stability": 0.25,
+        "speed": 0.9,
+        "similarity_boost": 0.8,
+        "pronunciation_dictionary_locators": []
+      },
+      "agent": {
+        "prompt": {
+          "llm": "deepseek-v41-flash",
+          "reasoning_effort": null,
+          "temperature": 0
+        }
+      }
+    }
+  },
+  {
+    "name": "zackifurz",
+    "ersatzStimme": "N2lVS1w4EtoT3dr4eOWO",
+    "conversation_config": {
+      "tts": {
+        "model_id": "eleven_v4_turbo",
+        "voice_id": "YUHmcp7dQfsVqjRGujPQ",
+        "supported_voices": [],
+        "expressive_mode": true,
+        "agent_output_audio_format": "pcm_16000",
+        "optimize_streaming_latency": 4,
+        "stability": 0.25,
+        "speed": 0.9,
+        "similarity_boost": 0.8,
+        "pronunciation_dictionary_locators": []
+      },
+      "agent": {
+        "prompt": {
+          "llm": "deepseek-v41-flash",
+          "reasoning_effort": null,
+          "temperature": 0
+        }
+      }
+    }
+  },
+  {
+    "name": "schrumpeldei",
+    "conversation_config": {
+      "tts": {
+        "model_id": "eleven_v4_turbo",
+        "voice_id": "KFcKSkKkWqMVhCbLkuvh",
+        "supported_voices": [],
+        "expressive_mode": true,
+        "agent_output_audio_format": "pcm_16000",
+        "optimize_streaming_latency": 4,
+        "stability": 0.25,
+        "speed": 0.8,
+        "similarity_boost": 0.8,
+        "pronunciation_dictionary_locators": []
+      },
+      "agent": {
+        "prompt": {
+          "llm": "deepseek-v41-flash",
+          "reasoning_effort": null,
+          "temperature": 0
+        }
+      }
+    }
+  },
+  {
+    "name": "zackifurzSpinne",
+    "ersatzStimme": "N2lVS1w4EtoT3dr4eOWO",
+    "conversation_config": {
+      "tts": {
+        "model_id": "eleven_v4_turbo",
+        "voice_id": "KkyoGrMyFBxeBp2uMkWf",
+        "supported_voices": [],
+        "expressive_mode": true,
+        "agent_output_audio_format": "pcm_16000",
+        "optimize_streaming_latency": 4,
+        "stability": 0.25,
+        "speed": 1.03,
+        "similarity_boost": 0.8,
+        "pronunciation_dictionary_locators": []
+      },
+      "agent": {
+        "prompt": {
+          "llm": "deepseek-v41-flash",
+          "reasoning_effort": null,
+          "temperature": 0
+        }
+      }
+    }
+  }
+]

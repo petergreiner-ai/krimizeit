@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KrimiZeit</title>
+    <link rel="stylesheet" href="seiten.css">
+</head>
+<body>
+    <main class="karte">
+        <h1>KrimiZeit</h1>
+        <p>
+            Interaktive Sprach-Krimis: Du bist Ermittler, sprichst mit den Figuren über dein Mikrofon,
+            sammelst Hinweise und löst den Fall. Die Figuren antworten mit eigenen Stimmen
+            (über <a href="https://elevenlabs.io" target="_blank" rel="noopener">ElevenLabs</a>).
+        </p>
+
+        <p id="status" class="status"></p>
+
+        <div class="spiele">
+            <a class="spiel" href="login.html?fall=rb">
+                <b>Rotkäppchen und der böse Wolf</b>
+                <span>Ein Märchen-Krimi</span>
+            </a>
+            <a class="spiel" href="login.html?fall=zz">
+                <b>Zauberer Zackifurz: Das versaute Weihnachten</b>
+                <span>Ein Weihnachts-Krimi mit dem Zauberer Zackifurz</span>
+            </a>
+            <a class="spiel" href="login.html?fall=sh2">
+                <b>Sherlock Holmes: Mord im Nachtzug</b>
+                <span>Ein Fall für Sherlock Holmes und Dr. Watson</span>
+            </a>
+        </div>
+
+        <p class="hinweis">
+            Am besten am PC mit Mikrofon und Kopfhörern in Chrome oder Edge spielen.
+            Die Gespräche laufen über dein eigenes ElevenLabs-Konto und kosten dort Guthaben.
+        </p>
+        <p class="klein">
+            <a href="einrichten.html">Einrichtung / Schlüssel ändern</a> ·
+            <a href="https://github.com/" id="quelle">Quellcode und eigene Fälle bauen</a> ·
+            Erdacht und programmiert von „The Greiners“
+        </p>
+    </main>
+
+    <script>
+        const eingerichtet = localStorage.getItem("krimizeit_schluessel") && localStorage.getItem("krimizeit_agent");
+        const status = document.getElementById("status");
+        if (eingerichtet) {
+            status.textContent = "Eingerichtet. Wähle ein Spiel.";
+            status.classList.add("ok");
+        } else {
+            status.innerHTML = 'Vor dem ersten Spiel bitte einmal <a href="einrichten.html">einrichten</a> (eigener ElevenLabs-Schlüssel).';
+        }
+        // Link zum Repository aus der GitHub-Pages-Adresse ableiten (<name>.github.io/<repo>/)
+        const m = /^([^.]+)\.github\.io$/.exec(location.hostname);
+        const repo = location.pathname.split("/").filter(Boolean)[0];
+        if (m && repo) document.getElementById("quelle").href = `https://github.com/${m[1]}/${repo}`;
+    </script>
+</body>
+</html>
